@@ -14,8 +14,8 @@
     	"Webdevelopment"
 	],
 	"engines": {
-		"node": "^",
-		"npm": "^"
+		"node": "^8.7.0",
+		"npm": "^6.4.0"
 	},
   	"author": "Uzoanya Dominic",
   	"license": "ISC",
