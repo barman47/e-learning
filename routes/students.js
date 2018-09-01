@@ -7,7 +7,7 @@ router.get('/register', (req, res) => {
     res.render('studentSignup', {
         title: 'Student Signup',
         style: '/css/signup.css',
-        script: '/js/studentSignup.js'
+        script: '/js/signup.js'
     });
 });
 

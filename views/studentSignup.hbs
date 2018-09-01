@@ -1,32 +1,42 @@
     <div id="form-container" class="row container">
-        <form class="col s12" action="" method="POST">
+        <form name="form" class="col s12" action="/students/register" method="POST">
             <h4 class="center">Student Sign Up</h4>
             <div class="row">
                 <div class="input-field col s12 l6">
-                    <input type="text" name="firstName" id="firstName" validate required>
+                    <i class="mdi mdi-account-outline prefix form-icons"></i>
+                    <input type="text" name="firstName" id="firstName" class="validate" required>
                     <label for="firstName">First Name</label>
+                    <span class="helper-text" data-error="Please provide your First Name" data-success=""></span>
                 </div>
                 <div class="input-field col s12 l6">
-                    <input type="text" name="lastName" id="lastName" validate required>
+                    <i class="mdi mdi-account-outline prefix form-icons"></i>
+                    <input type="text" name="lastName" id="lastName" class="validate" required>
                     <label for="lastName">Last Name</label>
+                    <span class="helper-text" data-error="Please provide your Last Name" data-success=""></span>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input type="email" name="email" id="email" validate required>
+                    <i class="mdi mdi-email-outline prefix form-icons"></i>
+                    <input type="email" name="email" id="email" class="validate" required>
                     <label for="email">Email</label>
+                    <span class="helper-text" data-error="Please provide a valid email address" data-success="">e.g. dominic@example.com</span>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input type="password" name="password" id="password" validate required>
+                    <i class="mdi mdi-lock-outline prefix form-icons"></i>
+                    <input type="password" name="password" id="password" class="validate" required>
                     <label for="password">Password</label>
+                    <span class="helper-text" data-error="Password should be alphanumeric and at least 8 characters" data-success="">Password should be alphanumeric and at least 8 characters</span>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input type="password" name="confirmPassword" id="confirmPassword" validate required>
+                    <i class="mdi mdi-lock-outline prefix form-icons"></i>
+                    <input type="password" name="confirmPassword" id="confirmPassword" class="validate" required>
                     <label for="confirmPassword">Confirm Password</label>
+                    <span class="helper-text" data-error="Passwords do not match! Please check." data-success="">Password should be alphanumeric and at least 8 characters</span>
                 </div>
             </div>
 
