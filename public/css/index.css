@@ -35,7 +35,7 @@ nav {
 
 #login-dropdown, #signup-dropdown, #courses {
 	position: absolute;
-	top: -65px;
+	top: -64px;
 }
 
 .dropdown-links {
@@ -111,6 +111,20 @@ header, main {
 	color: #ffa500;
 }
 
+#parallax2-text {
+	background-color: rgba(0, 0, 0, 0.4);
+	color: #f1f1f1;
+	max-width: 60%;
+	padding: 20px;
+	text-align: center;
+	margin: 250px auto;
+}
+
+#parallax3-text {
+	color: #ffffff;
+	margin: 200px 0 0 100px;
+}
+
 #about-us {
 	margin: 80px auto;
 }
@@ -131,6 +145,23 @@ footer {
 .page-footer {
 	background-color: #f5f5f5;
 	color: rgba(0, 0, 0, 0.6);
+}
+
+.footer-icons {
+	color: #328036;
+}
+
+.footer-icons:hover {
+	color: #ffa500;
+}
+
+.footer-copyright {
+	padding: 50px !important;
+	font-size: 20px;
+}
+
+#top-arrow:hover {
+	color: #ffa500;
 }
 
 @media only screen and (max-width : 992px) {
