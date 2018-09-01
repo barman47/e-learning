@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     $('.pushpin').pushpin({
         top: $('.pushpin').offset().top,            
     });

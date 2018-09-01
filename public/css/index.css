@@ -105,9 +105,13 @@ header, main {
 	background-color: #f5f5f5;
 }
 
+.card {
+	cursor: pointer;
+}
+
 .card-icons {
 	position: relative;
-	top: 5px;
+	font-size: 24px;
 	color: #ffa500;
 }
 
@@ -129,44 +133,8 @@ header, main {
 	margin: 80px auto;
 }
 
-#footerLinks {
-	margin: 50px auto !important;
-}
-
-#footerLinks li {
-	display: inline-block;
-	margin-left: 20px;
-}
-
-footer {
-	color: rgba(0, 0, 0, 0.6) !important;
-}
-
-.page-footer {
-	background-color: #f5f5f5;
-	color: rgba(0, 0, 0, 0.6);
-}
-
-.footer-icons {
-	color: #328036;
-}
-
-.footer-icons:hover {
-	color: #ffa500;
-}
-
-.footer-copyright {
-	padding: 50px !important;
-	font-size: 20px;
-}
 
 #top-arrow:hover {
 	color: #ffa500;
-}
-
-@media only screen and (max-width : 992px) {
-	header, main, footer {
-		padding-left: 0;
-	}
 }
   

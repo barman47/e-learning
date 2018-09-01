@@ -1,0 +1,53 @@
+    <div id="form-container" class="row container">
+        <form class="col s12" action="" method="POST">
+            <h4 class="center">Teacher Sign Up</h4>
+            <div class="row">
+                <div class="input-field col s12 l6">
+                    <input type="text" name="firstName" id="firstName" validate required>
+                    <label for="firstName">First Name</label>
+                </div>
+                <div class="input-field col s12 l6">
+                    <input type="text" name="lastName" id="lastName" validate required>
+                    <label for="lastName">Last Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="email" name="email" id="email" validate required>
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="password" name="password" id="password" validate required>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="password" name="confirmPassword" id="confirmPassword" validate required>
+                    <label for="confirmPassword">Confirm Password</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 center">
+                    <p>Gender:</p>
+                    <p>
+                        <label for="male">
+                            <input class="with-gap" type="radio" name="gender" id="male" required>
+                            <span>Male</span>
+                        </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label for="female">
+                            <input class="with-gap" type="radio" name="gender" id="female" required>
+                            <span>Female</span>
+                        </label>
+                    </p>
+                </div>
+            </div>
+            <div class="input-field center-align">
+                <button id="submitButton" class="btn" type="submit">Register</button>
+            </div>
+        </form>
+    </div>
