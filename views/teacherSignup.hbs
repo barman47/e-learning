@@ -1,16 +1,23 @@
+    {{#if errors}}
+        {{#each errors}}
+            <div>
+                <p class="red-text text-darken-2 error-messages center">{{this.msg}}</p>
+            </div>
+        {{/each}}
+    {{/if}}
     <div id="form-container" class="row container">
         <form name="form" class="col s12" action="/teachers/register" method="POST">
             <h4 class="center">Teacher Sign Up</h4>
             <div class="row">
                 <div class="input-field col s12 l6">
                     <i class="mdi mdi-account-outline prefix form-icons"></i>
-                    <input type="text" name="firstName" id="firstName" class="validate" required>
+                    <input type="text" name="firstName" id="firstName" class="validate" value="{{firstName}}" autofocus>
                     <label for="firstName">First Name</label>
-                    <span class="helper-text" data-error="Please provide your Last Name" data-success=""></span>
+                    <span class="helper-text" data-error="Please provide your First Name" data-success=""></span>
                 </div>
                 <div class="input-field col s12 l6">
                     <i class="mdi mdi-account-outline prefix form-icons"></i>
-                    <input type="text" name="lastName" id="lastName" class="validate" required>
+                    <input type="text" name="lastName" id="lastName" class="validate" value="{{lastName}}">
                     <label for="lastName">Last Name</label>
                     <span class="helper-text" data-error="Please provide your Last Name" data-success=""></span>
                 </div>
@@ -18,7 +25,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="mdi mdi-email-outline prefix form-icons"></i>
-                    <input type="email" name="email" id="email" class="validate" required>
+                    <input type="email" name="email" id="email" class="validate" value="{{email}}">
                     <label for="email">Email</label>
                     <span class="helper-text" data-error="Please provide a valid email address" data-success="">e.g. dominic@example.com</span>
                 </div>
@@ -26,7 +33,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="mdi mdi-lock-outline prefix form-icons"></i>
-                    <input type="password" name="password" id="password" class="validate" required>
+                    <input type="password" name="password" id="password" class="validate" value="{{password}}">
                     <label for="password">Password</label>
                     <span class="helper-text" data-error="Password should be alphanumeric and at least 8 characters" data-success="">Password should be alphanumeric and at least 8 characters</span>
                 </div>
@@ -34,7 +41,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="mdi mdi-lock-outline prefix form-icons"></i>
-                    <input type="password" name="confirmPassword" id="confirmPassword" class="validate" required>
+                    <input type="password" name="confirmPassword" id="confirmPassword" class="validate" value="{{confirmPassword}}">
                     <label for="confirmPassword">Confirm Password</label>
                     <span class="helper-text" data-error="Passwords do not match! Please check." data-success="">Password should be alphanumeric and at least 8 characters</span>
                 </div>
@@ -45,12 +52,12 @@
                     <p>Gender:</p>
                     <p>
                         <label for="male">
-                            <input class="with-gap" type="radio" name="gender" id="male" required>
+                            <input class="with-gap" type="radio" name="gender" id="male" value="male">
                             <span>Male</span>
                         </label>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <label for="female">
-                            <input class="with-gap" type="radio" name="gender" id="female" required>
+                            <input class="with-gap" type="radio" name="gender" id="female" value="female">
                             <span>Female</span>
                         </label>
                     </p>

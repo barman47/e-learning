@@ -7,11 +7,11 @@
 </div>
 
 <div id="navigation">
-    <nav class="pushpin green darken-2">
+    <nav class="pushpin">
         <ul id="login-dropdown" class="dropdown-content">
-            <li><a class="dropdown-links" href="#">Student</a></li>
+            <li><a class="dropdown-links modal-trigger" data-target="studentLoginModal">Student</a></li>
             <li class="divider"></li>
-            <li><a class="dropdown-links" href="#">Teacher</a></li>
+            <li><a class="dropdown-links modal-trigger" data-target="teacherLoginModal">Teacher</a></li>
         </ul>
         <ul id="signup-dropdown" class="dropdown-content">
             <li><a class="dropdown-links" href="/students/register">Student</a></li>
@@ -66,6 +66,82 @@
     </ul>
 </div>
 
+<div id="studentLoginModal" class="modal">
+    <div class="modal-content">
+        {{!-- <i class="mdi mdi-close right login-form-close-btn mdi-24px tooltipped modal-close"></i> --}}
+        <form name="studentLoginForm" method="POST" action="/students/login">
+            <div class="row">
+                <div class="col s12 center-align">
+                    <i class="mdi mdi-account-multiple login-form-avatar"></i>
+                    <h4>Student Login</h4>
+                </div>
+                <div class="col s12">
+                    <div class="input-field">
+                        <i class="mdi mdi-email-outline prefix form-icons"></i>
+                        <input type="email" id="studentEmail" name="studentEmail" class="validate">
+                        <label for="studentEmail">Email Address</label>
+                        <span id="studentEmailErrorMessage" class="helper-text" data-error="Invalid email address!" data-success=""></span>
+                    </div>
+                </div>
+            
+                <div class="col s12">
+                    <div class="input-field">
+                        <i class="mdi mdi-lock-outline prefix form-icons"></i>
+                        <input type="password" id="studentPassword" name="studentPassword" class="validate">
+                        <label for="studentPassword">Password</label>
+                        <span id="studentPasswordErrorMessage" class="helper-text" data-error="Please provide your password!" data-success=""></span>
+                    </div>
+                </div>
+            </div>
+            <div class="center-align input-field">
+                <button id="studentLoginButton" type="submit">Log in</button>
+            </div>
+            <br>
+            <div class="input-field center-align">
+                <p>Not Registered? <a class="form-links" href="/students/register">Sign up!</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="teacherLoginModal" class="modal">
+    <div class="modal-content">
+        {{!-- <i class="mdi mdi-close right login-form-close-btn mdi-24px tooltipped modal-close"></i> --}}
+        <form name="TeacherLoginForm" method="POST" action="/teachers/login">
+            <div class="row">
+                <div class="col s12 center-align">
+                    <i class="mdi mdi-account-multiple login-form-avatar"></i>
+                    <h4>Teacher Login</h4>
+                </div>
+                <div class="col s12">
+                    <div class="input-field">
+                        <i class="mdi mdi-email-outline prefix form-icons"></i>
+                        <input type="email" id="teacherEmail" name="teacherEmail" class="validate">
+                        <label for="teacherEmail">Email Address</label>
+                        <span id="teacherEmailErrorMessage" class="helper-text" data-error="Invalid email address!" data-success=""></span>
+                    </div>
+                </div>
+            
+                <div class="col s12">
+                    <div class="input-field">
+                        <i class="mdi mdi-lock-outline prefix form-icons"></i>
+                        <input type="password" id="teacherPassword" name="teacherPassword" class="validate">
+                        <label for="teacherPassword">Password</label>
+                        <span  id="teacherPasswordErrorMessage"class="helper-text" data-error="Please provide your password!" data-success=""></span>
+                    </div>
+                </div>
+            </div>
+            <div class="center-align input-field">
+                <button id="teacherLoginButton" type="submit">Log in</button>
+            </div>
+            <br>
+            <div class="input-field center-align">
+                <p>Not Registered? <a class="form-links" href="/teachers/register">Sign up!</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div class="parallax-container">
     <div class="section no-pad-bot">
         <div class="container">
@@ -117,7 +193,7 @@
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="img/mathematics.jpg" alt="">
+                        <img src="img/ecology.jpg" alt="Ecology">
                         <h5 class="center">Biology</h5>
                         <h6 class="center">Introduction to Ecology</h6>   
                     </div>
@@ -132,7 +208,7 @@
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="img/mathematics.jpg" alt="">
+                        <img src="img/demand.jpeg" alt="Effective Demand">
                         <h5 class="center">Commerce</h5>
                         <h6 class="center">Effective Demand</h6>   
                     </div>
@@ -147,7 +223,7 @@
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="img/mathematics.jpg" alt="">
+                        <img src="img/waves.jpg" alt="Waves">
                         <h5 class="center">Physics</h5>
                         <h6 class="center">Waves and Optics</h6>   
                     </div>
@@ -177,7 +253,7 @@
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="img/mathematics.jpg" alt="">
+                        <img src="img/hydrocarbons.png" alt="Hydrocarbons">
                         <h5 class="center">Chemistry</h5>
                         <h6 class="center">Introduction to Hydrocarbons</h6>   
                     </div>
@@ -192,7 +268,7 @@
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="img/mathematics.jpg" alt="">
+                        <img src="img/matter.png" alt="Matter">
                         <h5 class="center">Physics</h5>
                         <h6 class="center">Matter</h6>   
                     </div>
@@ -207,7 +283,7 @@
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="img/mathematics.jpg" alt="">
+                        <img src="img/e-business.jpg" alt="Commerce E-Business">
                         <h5 class="center">Commerce</h5>
                         <h6 class="center">E-Business</h6>   
                     </div>
@@ -222,7 +298,7 @@
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="img/mathematics.jpg" alt="">
+                        <img src="img/algorithms.jpg" alt="Algorithms">
                         <h5 class="center">Computer Science</h5>
                         <h6 class="center">Introduction to Algorithms</h6>   
                     </div>
@@ -237,7 +313,7 @@
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="img/mathematics.jpg" alt="">
+                        <img src="img/faith.jpg" alt="Faith">
                         <h5 class="center">CRS</h5>
                         <h6 class="center">Faith</h6>   
                     </div>
@@ -252,7 +328,7 @@
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="img/mathematics.jpg" alt="">
+                        <img src="img/radioactivity.png" alt="Radioactivity">
                         <h5 class="center">Chemistry</h5>
                         <h6 class="center">Radioactivity</h6>   
                     </div>
@@ -267,7 +343,7 @@
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="img/mathematics.jpg" alt="">
+                        <img src="img/love.jpg" alt="Love">
                         <h5 class="center">CRS</h5>
                         <h6 class="center">Love</h6>   
                     </div>
@@ -282,7 +358,7 @@
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="img/mathematics.jpg" alt="">
+                        <img src="img/reproduction.jpeg" alt="Reproduction">
                         <h5 class="center">Biology</h5>
                         <h6 class="center">Reproduction</h6>
                     </div>

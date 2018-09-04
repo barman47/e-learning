@@ -28,7 +28,7 @@ button:hover {
 }
 
 .input-field input[type=text]:focus + label, .input-field input[type=email]:focus + label, .input-field input[type=password]:focus + label {
-    color: #328036;   
+    color: #328036 !important;   
 }
 
 .input-field input[type=text]:focus, .input-field input[type=password]:focus, .input-field input[type=email]:focus {

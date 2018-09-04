@@ -48,6 +48,9 @@ $(document).ready(function () {
                 event.target.classList.add('invalid');
                 event.target.classList.remove('valid');
                 event.target.focus();
+                M.toast({
+                    html: 'Please provide a valid email to continue'
+                });
             } else {
                 event.target.classList.add('valid');
                 event.target.classList.remove('invalid');

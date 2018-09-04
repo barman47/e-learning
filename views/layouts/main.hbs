@@ -9,9 +9,32 @@
         <link rel="stylesheet" href="/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="{{style}}">
+        <style>
+            .messages {
+                padding: 10px 0;
+                margin: 0px !important;
+            }
+
+            .successClose:hover {
+                color: #ff0000;
+                cursor: pointer;
+            }
+
+            .failureClose:hover {
+                color: #ffffff;
+                cursor: pointer;
+            }
+        </style>
     </head>
     
     <body>
+        {{#if success_message}}
+            <p id="successText" class="green lighten-3 green-text text-darken-2 center messages">{{success_message}}<i class="right mdi mdi-close mdi-18px successClose"></i></p>
+        {{/if}}
+        
+        {{#if failure_message}}
+            <p id="failureText" class="red lighten-3 red-text text-darken-2 center messages">{{failure_message}}<i class="right mdi mdi-close mdi-18px failureClose"></i></p>    
+        {{/if}}
         {{{body}}}
         <footer class="page-footer">
             <div class="container">
@@ -37,6 +60,15 @@
         <script src="/js/jquery-3.1.1.min.js"></script>
         <script src="/js/materialize.min.js"></script>
         <script src="{{script}}"></script>
+        <script>
+            $('.successClose').click(function () {
+                $('#successText').remove();
+            });
+
+            $('.failureClose').click(function () {
+                $('#failureText').remove();
+            });
+        </script>
     </body>
     
 </html>
