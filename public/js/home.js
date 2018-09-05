@@ -20,6 +20,26 @@ $(document).ready(function () {
 
     var emailRegExp = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
 
+    const url = '/students/login';
+    let data = {
+        studentEmail: $('#studentEmail').val(),
+        studentPassword: $('#studentPassword').val()
+    };
+
+    function ajaxLogin (form) {
+        $.ajax(url, {
+            type: 'POST',
+            data
+        }).success(function () {
+            form.reset();
+        }).fail(function () {
+            M.toast({
+                html: 'Invalid Email or Password!'
+            });
+            // document.querySelector('#incorrectStudentData').style.display = 'block';
+        });
+    }
+
     function isEmpty (element) {
         if (element.value === '' || element.value.trim() === '') {
             return true;
@@ -30,26 +50,32 @@ $(document).ready(function () {
 
     function submitForm (form, inputsArr) {
         form.addEventListener('submit', function (event) {
-            for (var i = 0; i < inputsArr.length; i++) {
-                if (isEmpty(inputsArr[i][0])) {
-                    event.preventDefault();
-                    inputsArr[i][0].classList.add('invalid');
-                    inputsArr[i][0].focus();
-                    break;
-                }
+            if (isEmpty(inputArr[0][0])) {
+                event.preventDefault();
+                inputsArr[0][0].classList.add('invalid');
+                inputsArr[0][0].focus();
+            } else if (isEmpty(inputsArr[1][0])) {
+                event.preventDefault();
+                inputsArr[1][0].classList.add('invalid');
+                inputsArr[1][0].focus();
+            } else {
+                ajaxLogin(form);
             }
         }, false);
     }
 
-    function handleButtonClick (form, button, inputsArr) {
-        form.addEventListener('submit', function (event) {
-            for (var i = 0; i < inputsArr.length; i++) {
-                if (isEmpty(inputsArr[i][0])) {
-                    event.preventDefault();
-                    inputsArr[i][0].classList.add('invalid');
-                    inputsArr[i][0].focus();
-                    break;
-                }
+    function handleButtonClick (button, inputsArr) {
+        button.addEventListener('click', function (event) {
+            if (isEmpty(inputsArr[0][0])) {
+                event.preventDefault();
+                inputsArr[0][0].classList.add('invalid');
+                inputsArr[0][0].focus();
+            } else if (isEmpty(inputsArr[1][0])) {
+                event.preventDefault();
+                inputsArr[1][0].classList.add('invalid');
+                inputsArr[1][0].focus();
+            } else {
+                ajaxLogin(form);
             }
         }, false);
     }
@@ -75,9 +101,9 @@ $(document).ready(function () {
                 event.target.classList.add('invalid');
                 event.target.classList.remove('valid');
                 emailField.focus();
-                M.toast({
-                    html: 'Please provide a valid email to continue.'
-                });
+                // M.toast({
+                //     html: 'Please provide a valid email to continue.'
+                // });
             }
         }, false);
     }
@@ -85,12 +111,12 @@ $(document).ready(function () {
     addKeyupEvent(studentInputs[0][0]);
     addFocusoutEvent(studentInputs[0][0]);
     submitForm(forms.student, studentInputs);
-    handleButtonClick(forms.student, buttons.student, studentInputs);
+    handleButtonClick(buttons.student, studentInputs);
 
     addKeyupEvent(teacherInputs[0][0]);
     addFocusoutEvent(teacherInputs[0][0]);
     submitForm(forms.teacher, teacherInputs);
-    handleButtonClick(forms.teacher, buttons.teacher, teacherInputs);
+    handleButtonClick(buttons.teacher, teacherInputs);
 
     $('.pushpin').pushpin({
         top: $('.pushpin').offset().top,            

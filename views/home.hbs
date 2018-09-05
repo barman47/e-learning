@@ -19,7 +19,7 @@
             <li><a class="dropdown-links" href="/teachers/register">Teacher</a></li>
         </ul>
         <ul id="courses" class="dropdown-content">
-            <li><a class="dropdown-links" href="#">Computer Science</a></li>
+            <li><a class="dropdown-links" href="#">Computer Studies</a></li>
             <li class="divider"></li>
             <li><a class="dropdown-links" href="#">Commerce</a></li>
             <li class="divider"></li>
@@ -37,7 +37,7 @@
                 <a href="#" class="brand-logo"><i id="logo" class="mdi mdi-school"></i>Edufy</a>
                 <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="menu-icon mdi mdi-menu">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li class="active"><a href=""><i class="nav-icons mdi mdi-home left"></i>Home</a></li>
+                    <li class="active"><a href=""><i class="nav-icons mdi mdi-home left"></i></a></li>
                     <li><a href="#!" class="dropdown-trigger" data-target="courses"><i class="nav-icons mdi mdi-google-pages left"></i>Courses<i class="mdi mdi-menu-down right"></i></a></li>
                     <li><a href="#!" class="dropdown-trigger" data-target="signup-dropdown"><i class="nav-icons mdi mdi-account-plus left"></i>Register<i class="mdi mdi-menu-down right"></i></a></li>
                     <li><a href="#!" class="dropdown-trigger" data-target="login-dropdown"><i class="nav-icons mdi mdi-login left"></i>Login<i class="mdi mdi-menu-down right"></i></a></li>
@@ -92,6 +92,7 @@
                         <span id="studentPasswordErrorMessage" class="helper-text" data-error="Please provide your password!" data-success=""></span>
                     </div>
                 </div>
+                {{!-- <span id="incorrectStudentData" class="red-text">Incorrect Email or Password!</span> --}}
             </div>
             <div class="center-align input-field">
                 <button id="studentLoginButton" type="submit">Log in</button>
@@ -192,11 +193,13 @@
         <div class="row">
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="img/ecology.jpg" alt="Ecology">
-                        <h5 class="center">Biology</h5>
-                        <h6 class="center">Introduction to Ecology</h6>   
-                    </div>
+                    <a href="#">
+                        <div class="card-image">
+                            <img src="img/ecology.jpg" alt="Ecology">
+                            <h5 class="center">Biology</h5>
+                            <h6 class="center"><a href="#">Introduction to Ecology</a></h6>   
+                        </div>
+                    </a>
                     <div class="card-action">
                         <div class="icons">
                             <i class="mdi mdi-school card-icons"></i><span>23 Students</span>
@@ -207,11 +210,13 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="img/demand.jpeg" alt="Effective Demand">
-                        <h5 class="center">Commerce</h5>
-                        <h6 class="center">Effective Demand</h6>   
-                    </div>
+                    <a href="#">
+                        <div class="card-image">
+                            <img src="img/demand.jpeg" alt="Effective Demand">
+                            <h5 class="center">Commerce</h5>
+                            <h6 class="center"><a href="#">Effective Demand</a></h6>   
+                        </div>
+                    </a>
                     <div class="card-action">
                         <div class="icons">
                             <i class="mdi mdi-school card-icons"></i><span>10 Students</span>
@@ -222,11 +227,13 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="img/waves.jpg" alt="Waves">
-                        <h5 class="center">Physics</h5>
-                        <h6 class="center">Waves and Optics</h6>   
-                    </div>
+                    <a href="#">
+                        <div class="card-image">
+                            <img src="img/waves.jpg" alt="Waves">
+                            <h5 class="center">Physics</h5>
+                            <h6 class="center"><a href="#">Waves and Optics</a></h6>   
+                        </div>
+                    </a>
                     <div class="card-action">
                         <div class="icons">
                             <i class="mdi mdi-school card-icons"></i><span>30 Students</span>
@@ -237,11 +244,13 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="img/mathematics.jpg" alt="">
-                        <h5 class="center">Computer Science</h5>
-                        <h6 class="center">QBASIC: Novice to Ninja</h6>   
-                    </div>
+                    <a href="#">
+                        <div class="card-image">
+                            <img src="img/mathematics.jpg" alt="">
+                            <h5 class="center">Computer Studies</h5>
+                            <h6 class="center"><a href="#">QBASIC: Novice to Ninja</a></h6>   
+                        </div>
+                    </a>
                     <div class="card-action">
                         <div class="icons">
                             <i class="mdi mdi-school card-icons"></i><span>20 Students</span>
@@ -252,11 +261,13 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="img/hydrocarbons.png" alt="Hydrocarbons">
-                        <h5 class="center">Chemistry</h5>
-                        <h6 class="center">Introduction to Hydrocarbons</h6>   
-                    </div>
+                    <a href="#">
+                        <div class="card-image">
+                            <img src="img/hydrocarbons.png" alt="Hydrocarbons">
+                            <h5 class="center">Chemistry</h5>
+                            <h6 class="center"><a>Introduction to Hydrocarbons</a></h6>   
+                        </div>
+                    </a>
                     <div class="card-action">
                         <div class="icons">
                             <i class="mdi mdi-school card-icons"></i><span>30 Students</span>
@@ -267,11 +278,13 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="img/matter.png" alt="Matter">
-                        <h5 class="center">Physics</h5>
-                        <h6 class="center">Matter</h6>   
-                    </div>
+                    <a href="#">
+                        <div class="card-image">
+                            <img src="img/matter.png" alt="Matter">
+                            <h5 class="center">Physics</h5>
+                            <h6 class="center"><a href="#">Matter</a></h6>   
+                        </div>
+                    </a>
                     <div class="card-action">
                         <div class="icons">
                             <i class="mdi mdi-school card-icons"></i><span>8 Students</span>
@@ -282,11 +295,13 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="img/e-business.jpg" alt="Commerce E-Business">
-                        <h5 class="center">Commerce</h5>
-                        <h6 class="center">E-Business</h6>   
-                    </div>
+                    <a href="#">
+                        <div class="card-image">
+                            <img src="img/e-business.jpg" alt="Commerce E-Business">
+                            <h5 class="center">Commerce</h5>
+                            <h6 class="center"><a href="#">E-Business</a></h6>   
+                        </div>
+                    </a>
                     <div class="card-action">
                         <div class="icons">
                             <i class="mdi mdi-school card-icons"></i><span>19 Students</span>
@@ -297,11 +312,13 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="img/algorithms.jpg" alt="Algorithms">
-                        <h5 class="center">Computer Science</h5>
-                        <h6 class="center">Introduction to Algorithms</h6>   
-                    </div>
+                    <a href="#">
+                        <div class="card-image">
+                            <img src="img/algorithms.jpg" alt="Algorithms">
+                            <h5 class="center">Computer Studies</h5>
+                            <h6 class="center"><a>Introduction to Algorithms</a></h6>   
+                        </div>
+                    </a>
                     <div class="card-action">
                         <div class="icons">
                             <i class="mdi mdi-school card-icons"></i><span>30 Students</span>
@@ -312,11 +329,13 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="img/faith.jpg" alt="Faith">
-                        <h5 class="center">CRS</h5>
-                        <h6 class="center">Faith</h6>   
-                    </div>
+                    <a href="#">
+                        <div class="card-image">
+                            <img src="img/faith.jpg" alt="Faith">
+                            <h5 class="center">CRS</h5>
+                            <h6 class="center"><a href="#">Faith</a></h6>   
+                        </div>
+                    </a>
                     <div class="card-action">
                         <div class="icons">
                             <i class="mdi mdi-school card-icons"></i><span>20 Students</span>
@@ -327,11 +346,13 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="img/radioactivity.png" alt="Radioactivity">
-                        <h5 class="center">Chemistry</h5>
-                        <h6 class="center">Radioactivity</h6>   
-                    </div>
+                    <a href="#">
+                        <div class="card-image">
+                            <img src="img/radioactivity.png" alt="Radioactivity">
+                            <h5 class="center">Chemistry</h5>
+                            <h6 class="center"><a href="#">Radioactivity</a></h6>   
+                        </div>
+                    </a>
                     <div class="card-action">
                         <div class="icons">
                             <i class="mdi mdi-school card-icons"></i><span>28 Students</span>
@@ -342,11 +363,13 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="img/love.jpg" alt="Love">
-                        <h5 class="center">CRS</h5>
-                        <h6 class="center">Love</h6>   
-                    </div>
+                    <a href="#">
+                        <div class="card-image">
+                            <img src="img/love.jpg" alt="Love">
+                            <h5 class="center">CRS</h5>
+                            <h6 class="center"><a href="#">Love</a></h6>   
+                        </div>
+                    </a>
                     <div class="card-action">
                         <div class="icons">
                             <i class="mdi mdi-school card-icons"></i><span>25 Students</span>
@@ -357,11 +380,13 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="img/reproduction.jpeg" alt="Reproduction">
-                        <h5 class="center">Biology</h5>
-                        <h6 class="center">Reproduction</h6>
-                    </div>
+                    <a href="#">
+                        <div class="card-image">
+                            <img src="img/reproduction.jpeg" alt="Reproduction">
+                            <h5 class="center">Biology</h5>
+                            <h6 class="center"><a href="#">Reproduction</a></h6>
+                        </div>
+                    </a>
                     <div class="card-action">
                         <div class="icons">
                             <i class="mdi mdi-school card-icons"></i><span>30 Students</span>

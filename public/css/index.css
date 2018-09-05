@@ -160,6 +160,11 @@ form {
     color: #c5c5c5;
 }
 
+#incorrectStudentData {
+	display: none;
+	font-size: 12px !important;
+}
+
 /*Student Login Form End*/
 
 .card-image img {

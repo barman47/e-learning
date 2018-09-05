@@ -16,14 +16,15 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
     const body = req.body;
-    const newStudent = {};
-    newStudent.firstName = body.firstName;
-    newStudent.lastName = body.lastName;
-    newStudent.email = body.email;
-    newStudent.password = body.password;
-    newStudent.confirmPassword = body.confirmPassword;
-    newStudent.gender = body.gender;
-
+    const newStudent = {
+        firstName: body.firstName,
+        lastName: body.lastName,
+        email: body.email,
+        password: body.password,
+        confirmPassword: body.confirmPassword,
+        gender: body.gender
+    };
+    
     req.checkBody('firstName', 'First Name is required').notEmpty();
     req.checkBody('lastName', 'Last Name is required').notEmpty();
     req.checkBody('email', 'Invalid Email Address').isEmail();
@@ -68,7 +69,7 @@ router.post('/register', (req, res) => {
                     } else {
                         req.flash('success', 'Registration Successful. You now have complete Access to all our Services.');
                         res.redirect('/');
-                    }
+                    }   
                 });
             });
         });
@@ -80,20 +81,25 @@ router.post('/login', (req, res, next) => {
         if (err) {
             return next(err);
         }
-
         if (!student) {
-            //req.flash('failure', 'Incorrect email or password!');
-            res.send('Incorrect Email or Password');
-            // next();
+            return res.end();
         }
+
         req.logIn(student, (err) => {
             let id = student._id;
-            id = mongoose.Types.ObjectId(id);
-            res.send('Student Logged In');
-            //return res.redirect()
-            // next();
+            id = mongoose.Types.ObjectId(id); 
+            res.redirect(`/students/dashboard/${id}`);
         });
     })(req, res, next);
+});
+
+router.get('/dashboard/:id', (req, res) => {
+    console.log(req.params);
+    res.render('studentDashboard', {
+        title: 'Student Dashboard',
+        style: '/css/studentDashboard.css',
+        script: '/js/studentDashboard.js'
+    });
 });
 
 module.exports = router;

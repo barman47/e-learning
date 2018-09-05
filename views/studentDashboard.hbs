@@ -1,0 +1,60 @@
+<div id="navigation">
+    <nav class="green darken-2">
+        <ul id="login-dropdown" class="dropdown-content">
+            <li><a class="dropdown-links modal-trigger" data-target="studentLoginModal">Student</a></li>
+            <li class="divider"></li>
+            <li><a class="dropdown-links modal-trigger" data-target="teacherLoginModal">Teacher</a></li>
+        </ul>
+        <ul id="signup-dropdown" class="dropdown-content">
+            <li><a class="dropdown-links" href="/students/register">Student</a></li>
+            <li class="divider"></li>
+            <li><a class="dropdown-links" href="/teachers/register">Teacher</a></li>
+        </ul>
+        <ul id="courses" class="dropdown-content">
+            <li><a class="dropdown-links" href="#">Computer Studies</a></li>
+            <li class="divider"></li>
+            <li><a class="dropdown-links" href="#">Commerce</a></li>
+            <li class="divider"></li>
+            <li><a class="dropdown-links" href="#">Biology</a></li>
+            <li class="divider"></li>
+            <li><a class="dropdown-links" href="#">Chemistry</a></li>
+            <li class="divider"></li>
+            <li><a class="dropdown-links" href="#">Physics</a></li>
+            <li class="divider"></li>
+            <li><a class="dropdown-links" href="#">Christian Religious Studies</a></li>
+        </ul>
+
+        <div class="nav-wrapper">
+            <div class="container">
+                <a href="/" class="brand-logo"><i id="logo" class="mdi mdi-school"></i>Edufy</a>
+                <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="menu-icon mdi mdi-menu">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li class="active"><a href=""><i class="nav-icons mdi mdi-home left"></i>Home</a></li>
+                    <li><a href="#!" class="dropdown-trigger" data-target="courses"><i class="nav-icons mdi mdi-google-pages left"></i>Courses<i class="mdi mdi-menu-down right"></i></a></li>
+                    <li><a href="#!" class="dropdown-trigger" data-target="signup-dropdown"><i class="nav-icons mdi mdi-account-plus left"></i>Register<i class="mdi mdi-menu-down right"></i></a></li>
+                    <li><a href="#!" class="dropdown-trigger" data-target="login-dropdown"><i class="nav-icons mdi mdi-login left"></i>Login<i class="mdi mdi-menu-down right"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <ul id="mobile-menu" class="sidenav">
+        {{!-- <li><a href=""><i class="material-icons right green-text text-darken-2">close</i></a></li> --}}
+        <li><a href="#" class="dropdown-links"><i class="green-text text-darken-2 material-icons">home</i>Home</a></li>
+        <li><div class="divider"></div></li>
+        <li><a href="#" class="dropdown-links"><i class="green-text text-darken-2 material-icons">pages</i>Courses</a></li>
+        <li><a href="#" class="dropdown-links"><i class="green-text text-darken-2 material-icons">person_add</i>Register</a></li>
+        <li><a href="#" class="dropdown-links"><i class="green-text text-darken-2 material-icons">lock_outline</i>Login</a></li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+                <a class="collapsible-header">Signup<i class="material-icons">arrow_drop_down</i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="#!" class="red-text">Student</a></li>
+                        <li><a href="#!" class="red-text">Teacher</a></li>
+                    </ul>
+                </div>
+            </ul>
+        </li>
+    </ul>
+</div>
+<h1 class="red-text text-darken-2">Student Dashboard</h1>
