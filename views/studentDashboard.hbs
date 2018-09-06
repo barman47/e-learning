@@ -1,72 +1,141 @@
-<div id="navigation">
+<div id="navigation" class="scrollspy">
     <nav class="pushpin green darken-2">
-        <ul id="login-dropdown" class="dropdown-content">
-            <li><a class="dropdown-links modal-trigger" data-target="studentLoginModal">Student</a></li>
-            <li class="divider"></li>
-            <li><a class="dropdown-links modal-trigger" data-target="teacherLoginModal">Teacher</a></li>
-        </ul>
-        <ul id="signup-dropdown" class="dropdown-content">
-            <li><a class="dropdown-links" href="/students/register">Student</a></li>
-            <li class="divider"></li>
-            <li><a class="dropdown-links" href="/teachers/register">Teacher</a></li>
-        </ul>
         <ul id="courses-dropdown" class="dropdown-content">
-            <li><a class="dropdown-links" href="#">Computer Studies</a></li>
+            <li><a class="dropdown-links" href="#computer-courses">Computer Studies</a></li>
             <li class="divider"></li>
-            <li><a class="dropdown-links" href="#">Commerce</a></li>
+            <li><a class="dropdown-links" href="#commerce-courses">Commerce</a></li>
             <li class="divider"></li>
-            <li><a class="dropdown-links" href="#">Biology</a></li>
+            <li><a class="dropdown-links" href="#biology-courses">Biology</a></li>
             <li class="divider"></li>
-            <li><a class="dropdown-links" href="#">Chemistry</a></li>
+            <li><a class="dropdown-links" href="#chemistry-courses">Chemistry</a></li>
             <li class="divider"></li>
-            <li><a class="dropdown-links" href="#">Physics</a></li>
+            <li><a class="dropdown-links" href="#physics-courses">Physics</a></li>
             <li class="divider"></li>
-            <li><a class="dropdown-links" href="#">Christian Religious Studies</a></li>
+            <li><a class="dropdown-links" href="#crs-courses">Christian Religious Studies</a></li>
         </ul>
 
         <div class="nav-wrapper">
             <div class="container">
-                <a href="#" class="brand-logo"><i id="logo" class="mdi mdi-school"></i>Edufy</a>
+                <a href="/" class="brand-logo"><i id="logo" class="mdi mdi-school"></i>Edufy</a>
                 <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="menu-icon mdi mdi-menu"></i></a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li class="active"><a href=""><i class="nav-icons mdi mdi-home left"></i>Home</a></li>
-                    <li><a href="#!" class="dropdown-trigger" data-target="courses-dropdown"><i class="nav-icons mdi mdi-google-pages left"></i>Courses<i class="mdi mdi-menu-down right"></i></a></li>
-                    <li><a href="#!" class="dropdown-trigger" data-target="signup-dropdown"><i class="nav-icons mdi mdi-account-plus left"></i>Register<i class="mdi mdi-menu-down right"></i></a></li>
-                    <li><a href="#!" class="dropdown-trigger" data-target="login-dropdown"><i class="nav-icons mdi mdi-login left"></i>Login<i class="mdi mdi-menu-down right"></i></a></li>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href=""><i class="nav-icons mdi mdi-home left"></i>Home</a></li>
+                    <li class="active"><a href=""><i class="nav-icons mdi mdi-home left"></i>My Dashboard</a></li>
+                    <li><a class="dropdown-trigger" data-target="courses-dropdown"><i class="nav-icons mdi mdi-google-pages left"></i>Courses<i class="mdi mdi-menu-down right"></i></a></li>
+                    <li><a href="/logout"><i class="nav-icons mdi mdi-logout left"></i>Logout</i></a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <ul id="mobile-login-dropdown" class="dropdown-content">
-        <li><a class="dropdown-links modal-trigger" data-target="studentLoginModal">Student</a></li>
-        <li class="divider"></li>
-        <li><a class="dropdown-links modal-trigger" data-target="teacherLoginModal">Teacher</a></li>
-    </ul>
-    <ul id="mobile-signup-dropdown" class="dropdown-content">
-        <li><a class="dropdown-links" href="/students/register">Student</a></li>
-        <li class="divider"></li>
-        <li><a class="dropdown-links" href="/teachers/register">Teacher</a></li>
-    </ul>
     <ul id="mobile-courses-dropdown" class="dropdown-content">
-        <li><a class="dropdown-links" href="#">Computer Studies</a></li>
+        <li><a class="dropdown-links" href="#computer-courses">Computer Studies</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-links" href="#">Commerce</a></li>
+        <li><a class="dropdown-links" href="#commerce-courses">Commerce</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-links" href="#">Biology</a></li>
+        <li><a class="dropdown-links" href="#biology-courses">Biology</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-links" href="#">Chemistry</a></li>
+        <li><a class="dropdown-links" href="#chemistry-courses">Chemistry</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-links" href="#">Physics</a></li>
+        <li><a class="dropdown-links" href="#physics-courses">Physics</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-links" href="#">Christian Religious Studies</a></li>
+        <li><a class="dropdown-links" href="#crs-courses">Christian Religious Studies</a></li>
     </ul>
 
     <ul id="mobile-menu" class="sidenav">
         <li><a href="#" class="dropdown-links"><i class="green-text text-darken-2 mdi mdi-home"></i>Home</a></li>
         <li><div class="divider"></div></li>
-        <li><a href="#" class="dropdown-trigger" data-target="mobile-courses-dropdown"><i class="green-text text-darken-2 mdi mdi-google-pages"></i>Courses</a></li>
-        <li><a href="#" class="dropdown-trigger" data-target="mobile-signup-dropdown"><i class="green-text text-darken-2 mdi mdi-account-plus"></i>Register</a></li>
-        <li><a href="#" class="dropdown-trigger" data-target="mobile-login-dropdown"><i class="green-text text-darken-2 mdi mdi-login"></i>Login</a></li>
+        <li><a class="dropdown-trigger" data-target="mobile-courses-dropdown"><i class="green-text text-darken-2 mdi mdi-google-pages"></i>Courses</a></li>
+        <li class="active"><a href="">My Dashboard<i class="green-text text-darken-2 mdi mdi-google-pages"></i></a></li>
+        <li><a href="/logout"><i class="green-text text-darken-2 mdi mdi-logout"></i>Logout</a></li>
     </ul>
 </div>
-<h1 class="red-text text-darken-2">Student Dashboard</h1>
+<div class="container">
+    <h3 class="green-text text-darken-2 center">Study Materials</h3>
+    <ul id="computer-courses" class="scrollspy collection with-header">
+        <li class="collection-header  darken-4">Computer Studies</li>
+        <li class="collection-item"><a>Course 1</a></li>
+        <li class="collection-item"><a>Course 2</a></li>
+        <li class="collection-item"><a>Course 3</a></li>
+        <li class="collection-item"><a>Course 4</a></li>
+        <li class="collection-item"><a>Course 5</a></li>
+    </ul>
+    <ul id="commerce-courses" class="scrollspy collection with-header">
+        <li class="collection-header darken-4">Commerce</li>
+        <li class="collection-item"><a>Course 1</a></li>
+        <li class="collection-item"><a>Course 2</a></li>
+        <li class="collection-item"><a>Course 3</a></li>
+        <li class="collection-item"><a>Course 4</a></li>
+        <li class="collection-item"><a>Course 5</a></li>
+    </ul>
+    <ul id="biology-courses" class="scrollspy collection with-header">
+        <li class="collection-header darken-4">Biology</li>
+        <li class="collection-item"><a>Course 1</a></li>
+        <li class="collection-item"><a>Course 2</a></li>
+        <li class="collection-item"><a>Course 3</a></li>
+        <li class="collection-item"><a>Course 4</a></li>
+        <li class="collection-item"><a>Course 5</a></li>
+    </ul>
+    <ul id="chemistry-courses" class="scrollspy collection with-header">
+        <li class="collection-header darken-4">Chemistry</li>
+        <li class="collection-item"><a>Course 1</a></li>
+        <li class="collection-item"><a>Course 2</a></li>
+        <li class="collection-item"><a>Course 3</a></li>
+        <li class="collection-item"><a>Course 4</a></li>
+        <li class="collection-item"><a>Course 5</a></li>
+    </ul>
+    <ul id="physics-courses" class="scrollspy collection with-header">
+        <li class="collection-header darken-4">Physics</li>
+        <li class="collection-item"><a>Course 1</a></li>
+        <li class="collection-item"><a>Course 2</a></li>
+        <li class="collection-item"><a>Course 3</a></li>
+        <li class="collection-item"><a>Course 4</a></li>
+        <li class="collection-item"><a>Course 5</a></li>
+    </ul>
+    <ul id="crs-courses" class="scrollspy collection with-header">
+        <li class="collection-header darken-4">Christian Religious Studies</li>
+        <li class="collection-item"><a>Course 1</a></li>
+        <li class="collection-item"><a>Course 2</a></li>
+        <li class="collection-item"><a>Course 3</a></li>
+        <li class="collection-item"><a>Course 4</a></li>
+        <li class="collection-item"><a>Course 5</a></li>
+    </ul>
+</div> 
+
+<div class="fixed-action-btn">
+    <a class="btn btn-floating btn-large red lighten-1">
+        <i class="mdi mdi-dots-vertical"></i>
+    </a>
+    <ul>
+        <li><a class="btn-floating purple lighten-3 tooltipped" data-tooltip="Answered Questions"><i class="mdi mdi-message-alert"></i></a></li>
+        <li><a class="btn-floating blue lighten-2 tooltipped modal-trigger" data-target="questions-modal" data-tooltip="Ask a Question"><i class="mdi mdi-help"></i></a></li>
+        <li><a class="btn-floating yellow darken-2 tooltipped" href="#navigation" id="top" data-tooltip="To page top"><i class="mdi mdi-chevron-up"></i></a></li>
+    </ul>
+</div>
+<div id="questions-modal" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12">
+                <i class="mdi mdi-close mdi-24px right"></i>
+                <h3 id="questionHeader">Ask A Question</h3>
+                <p>Teachers are just a click away from providing answers to your most in intriguing questions.</p>
+                <form name="questionForm" action="" method="POST">
+                    <div class="input-field">
+                        <textarea name="question" id="question" class="materialize-textarea"></textarea>
+                        <label for="question">Your Question here...</label>
+                    </div>
+                    <div class="input-field">
+                        <button type="submit" id="askQuestionButton" class="btn green darken-2">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+<br>
+</div>

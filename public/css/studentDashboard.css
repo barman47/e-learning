@@ -53,3 +53,19 @@ nav {
 header, main {
 	padding-left: 300px;
 }
+
+.collection-header {
+	background-color: #f5f5f5 !important;
+}
+
+.collection-item:hover {
+	background-color: #f5f5f5 !important;
+}
+
+#questionHeader {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.mdi-close:hover {
+	color: #328036;
+}
