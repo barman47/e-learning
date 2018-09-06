@@ -64,6 +64,7 @@ $(document).ready(function () {
                 textarea.focus()
             } else {
                 alert('Message Sent');
+                form.reset();
             }
         }, false);
     }

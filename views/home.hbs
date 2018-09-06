@@ -80,6 +80,13 @@
 
 <div id="studentLoginModal" class="modal">
     <div class="modal-content">
+        <div class="row container preloader">
+            <div class="col s12">
+                <div class="progress">
+                    <div class="indeterminate"></div>
+                </div>
+            </div>
+        </div>
         <form name="studentLoginForm" method="POST" action="/students/login">
             <div class="row">
                 <div class="col s12 center-align">
@@ -118,7 +125,13 @@
 
 <div id="teacherLoginModal" class="modal">
     <div class="modal-content">
-        {{!-- <i class="mdi mdi-close right login-form-close-btn mdi-24px tooltipped modal-close"></i> --}}
+        <div class="row container preloader">
+            <div class="col s12">
+                <div class="progress">
+                    <div class="indeterminate"></div>
+                </div>
+            </div>
+        </div>
         <form name="TeacherLoginForm" method="POST" action="/teachers/login">
             <div class="row">
                 <div class="col s12 center-align">
@@ -204,11 +217,11 @@
         <div class="row">
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <a href="#">
+                    <a href="/books/ecology.pdf" target="_blank">
                         <div class="card-image">
                             <img src="img/ecology.jpg" alt="Ecology">
                             <h5 class="center">Biology</h5>
-                            <h6 class="center"><a href="#">Introduction to Ecology</a></h6>   
+                            <h6 class="center"><a href="/books/ecology.pdf" target="_blank" class="title-links">Introduction to Ecology</a></h6>   
                         </div>
                     </a>
                     <div class="card-action">
@@ -221,11 +234,11 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <a href="#">
+                    <a href="/books/effective-demand.pdf" target="_blank">
                         <div class="card-image">
                             <img src="img/demand.jpeg" alt="Effective Demand">
                             <h5 class="center">Commerce</h5>
-                            <h6 class="center"><a href="#">Effective Demand</a></h6>   
+                            <h6 class="center"><a href="/books/effective-demand.pdf" target="_blank" class="title-links">Effective Demand</a></h6>   
                         </div>
                     </a>
                     <div class="card-action">
@@ -238,11 +251,11 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <a href="#">
+                    <a href="/books/waves-and-optics.pdf" target="_blank">
                         <div class="card-image">
                             <img src="img/waves.jpg" alt="Waves">
                             <h5 class="center">Physics</h5>
-                            <h6 class="center"><a href="#">Waves and Optics</a></h6>   
+                            <h6 class="center"><a href="/books/waves-and-optics.pdf" target="_blank" class="title-links">Waves and Optics</a></h6>   
                         </div>
                     </a>
                     <div class="card-action">
@@ -255,11 +268,11 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <a href="#">
+                    <a href="/books/Introduction-to-algorithms.pdf" target="_blank">
                         <div class="card-image">
                             <img src="img/mathematics.jpg" alt="">
                             <h5 class="center">Computer Studies</h5>
-                            <h6 class="center"><a href="#">QBASIC: Novice to Ninja</a></h6>   
+                            <h6 class="center"><a href="/books/Introduction-to-algorithms.pdf" target="_blank" class="title-links">QBASIC: Novice to Ninja</a></h6>   
                         </div>
                     </a>
                     <div class="card-action">
@@ -272,11 +285,11 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <a href="#">
+                    <a href="/books/introduction-to-hydrocarbons.pdf" target="_blank">
                         <div class="card-image">
                             <img src="img/hydrocarbons.png" alt="Hydrocarbons">
                             <h5 class="center">Chemistry</h5>
-                            <h6 class="center"><a>Introduction to Hydrocarbons</a></h6>   
+                            <h6 class="center"><a hef="/books/introduction-to-hydrocarbons.pdf" target="_blank" class="title-links">Introduction to Hydrocarbons</a></h6>   
                         </div>
                     </a>
                     <div class="card-action">
@@ -289,11 +302,11 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <a href="#">
+                    <a href="/books/matter.pdf" target="_blank">
                         <div class="card-image">
                             <img src="img/matter.png" alt="Matter">
                             <h5 class="center">Physics</h5>
-                            <h6 class="center"><a href="#">Matter</a></h6>   
+                            <h6 class="center"><a href="/books/matter.pdf" target="_blank" class="title-links">Matter</a></h6>   
                         </div>
                     </a>
                     <div class="card-action">
@@ -306,11 +319,11 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <a href="#">
+                    <a href="/books/e-business.pdf" target="_blank">
                         <div class="card-image">
                             <img src="img/e-business.jpg" alt="Commerce E-Business">
                             <h5 class="center">Commerce</h5>
-                            <h6 class="center"><a href="#">E-Business</a></h6>   
+                            <h6 class="center"><a href="/books/e-business.pdf" target="_blank" class="title-links">E-Business</a></h6>   
                         </div>
                     </a>
                     <div class="card-action">
@@ -323,11 +336,11 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <a href="#">
+                    <a href="/books/Introduction-to-algorithms.pdf" target="_blank">
                         <div class="card-image">
                             <img src="img/algorithms.jpg" alt="Algorithms">
                             <h5 class="center">Computer Studies</h5>
-                            <h6 class="center"><a>Introduction to Algorithms</a></h6>   
+                            <h6 class="center"><a href="/books/Introduction-to-algorithms.pdf" target="_blank" class="title-links">Introduction to Algorithms</a></h6>   
                         </div>
                     </a>
                     <div class="card-action">
@@ -340,11 +353,11 @@
             </div>   
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
-                    <a href="#">
+                    <a href="/books/faith.pdf" target="_blank">
                         <div class="card-image">
                             <img src="img/faith.jpg" alt="Faith">
                             <h5 class="center">CRS</h5>
-                            <h6 class="center"><a href="#">Faith</a></h6>   
+                            <h6 class="center"><a href="/books/matter.pdf" target="_blank" class="title-links">Faith</a></h6>   
                         </div>
                     </a>
                     <div class="card-action">
@@ -361,7 +374,7 @@
                         <div class="card-image">
                             <img src="img/radioactivity.png" alt="Radioactivity">
                             <h5 class="center">Chemistry</h5>
-                            <h6 class="center"><a href="#">Radioactivity</a></h6>   
+                            <h6 class="center"><a href="#" class="title-links">Radioactivity</a></h6>   
                         </div>
                     </a>
                     <div class="card-action">
@@ -378,7 +391,7 @@
                         <div class="card-image">
                             <img src="img/love.jpg" alt="Love">
                             <h5 class="center">CRS</h5>
-                            <h6 class="center"><a href="#">Love</a></h6>   
+                            <h6 class="center"><a href="#" class="title-links">Love</a></h6>   
                         </div>
                     </a>
                     <div class="card-action">
@@ -395,7 +408,7 @@
                         <div class="card-image">
                             <img src="img/reproduction.jpeg" alt="Reproduction">
                             <h5 class="center">Biology</h5>
-                            <h6 class="center"><a href="#">Reproduction</a></h6>
+                            <h6 class="center"><a href="#" class="title-links">Reproduction</a></h6>
                         </div>
                     </a>
                     <div class="card-action">
@@ -429,8 +442,4 @@
 
 <div class="fixed-action-btn">
     <a href="#page-top" class="z-depth-4 btn-floating fab" id="top"><i id="top-arrow" class="green darken-2 mdi mdi-chevron-up"></i></a>
-</div>
-
-<div class="progress">
-      <div class="indeterminate"></div>
 </div>

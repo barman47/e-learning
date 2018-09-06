@@ -94,6 +94,13 @@ form {
 	margin-right: auto !important;
 }
 
+.preloader {
+	position: relative;
+	top: 40px;
+	z-index: 99;
+	display: none;
+}
+
 /* .login-form-close-btn {
 	position: relative;
 	top: -50px;
@@ -193,6 +200,10 @@ form {
 .card-icons {
 	position: relative;
 	font-size: 24px;
+	color: #ffa500;
+}
+
+.title-links:hover {
 	color: #ffa500;
 }
 

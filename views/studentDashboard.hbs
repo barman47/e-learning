@@ -16,10 +16,10 @@
 
         <div class="nav-wrapper">
             <div class="container">
-                <a href="/" class="brand-logo"><i id="logo" class="mdi mdi-school"></i>Edufy</a>
+                <a href="" class="brand-logo"><i id="logo" class="mdi mdi-school"></i>Edufy</a>
                 <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="menu-icon mdi mdi-menu"></i></a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href=""><i class="nav-icons mdi mdi-home left"></i>Home</a></li>
+                    <li><a href="/"><i class="nav-icons mdi mdi-home left"></i>Home</a></li>
                     <li class="active"><a href=""><i class="nav-icons mdi mdi-home left"></i>My Dashboard</a></li>
                     <li><a class="dropdown-trigger" data-target="courses-dropdown"><i class="nav-icons mdi mdi-google-pages left"></i>Courses<i class="mdi mdi-menu-down right"></i></a></li>
                     <li><a href="/logout"><i class="nav-icons mdi mdi-logout left"></i>Logout</i></a></li>
@@ -106,7 +106,7 @@
         <i class="mdi mdi-dots-vertical"></i>
     </a>
     <ul>
-        <li><a class="btn-floating purple lighten-3 tooltipped" data-tooltip="Answered Questions"><i class="mdi mdi-message-alert"></i></a></li>
+        <li><a class="btn-floating purple lighten-3 tooltipped modal-trigger" data-target="answers-modal" data-tooltip="Answered Questions"><i class="mdi mdi-message-alert"></i></a></li>
         <li><a class="btn-floating blue lighten-2 tooltipped modal-trigger" data-target="questions-modal" data-tooltip="Ask a Question"><i class="mdi mdi-help"></i></a></li>
         <li><a class="btn-floating yellow darken-2 tooltipped" href="#navigation" id="top" data-tooltip="To page top"><i class="mdi mdi-chevron-up"></i></a></li>
     </ul>
@@ -115,7 +115,7 @@
     <div class="modal-content">
         <div class="row">
             <div class="col s12">
-                <i class="mdi mdi-close mdi-24px right"></i>
+                <i class="mdi mdi-close mdi-24px modal-close right"></i>
                 <h3 id="questionHeader">Ask A Question</h3>
                 <p>Teachers are just a click away from providing answers to your most in intriguing questions.</p>
                 <form name="questionForm" action="" method="POST">
@@ -127,6 +127,18 @@
                         <button type="submit" id="askQuestionButton" class="btn green darken-2">Send</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="answers-modal" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12">
+                <i class="mdi mdi-close mdi-24px modal-close right"></i>
+                <h3 id="questionHeader">Recently Answered Questions</h3>
+                
             </div>
         </div>
     </div>

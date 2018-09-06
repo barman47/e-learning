@@ -59,26 +59,30 @@ $(document).ready(function () {
                 inputsArr[1][0].classList.add('invalid');
                 inputsArr[1][0].focus();
             } else {
-                ajaxLogin(form);
+                document.querySelector('.preloader').style.display = 'block';
+                form.disabled = true;
+                setTimeout(function () {
+                    ajaxLogin(form);
+                }, 2000);
             }
         }, false);
     }
 
-    function handleButtonClick (button, inputsArr) {
-        button.addEventListener('click', function (event) {
-            if (isEmpty(inputsArr[0][0])) {
-                event.preventDefault();
-                inputsArr[0][0].classList.add('invalid');
-                inputsArr[0][0].focus();
-            } else if (isEmpty(inputsArr[1][0])) {
-                event.preventDefault();
-                inputsArr[1][0].classList.add('invalid');
-                inputsArr[1][0].focus();
-            } else {
-                ajaxLogin(form);
-            }
-        }, false);
-    }
+    // function handleButtonClick (button, inputsArr) {
+    //     button.addEventListener('click', function (event) {
+    //         if (isEmpty(inputsArr[0][0])) {
+    //             event.preventDefault();
+    //             inputsArr[0][0].classList.add('invalid');
+    //             inputsArr[0][0].focus();
+    //         } else if (isEmpty(inputsArr[1][0])) {
+    //             event.preventDefault();
+    //             inputsArr[1][0].classList.add('invalid');
+    //             inputsArr[1][0].focus();
+    //         } else {
+    //             ajaxLogin(form);
+    //         }
+    //     }, false);
+    // }
 
     function addKeyupEvent (emailField) {
         emailField.addEventListener('keyup', function (event) {
@@ -111,12 +115,12 @@ $(document).ready(function () {
     addKeyupEvent(studentInputs[0][0]);
     addFocusoutEvent(studentInputs[0][0]);
     submitForm(forms.student, studentInputs);
-    handleButtonClick(buttons.student, studentInputs);
+    //handleButtonClick(buttons.student, studentInputs);
 
     addKeyupEvent(teacherInputs[0][0]);
     addFocusoutEvent(teacherInputs[0][0]);
     submitForm(forms.teacher, teacherInputs);
-    handleButtonClick(buttons.teacher, teacherInputs);
+    //handleButtonClick(buttons.teacher, teacherInputs);
 
     $('.pushpin').pushpin({
         top: $('.pushpin').offset().top,            
