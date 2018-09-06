@@ -50,7 +50,7 @@ $(document).ready(function () {
 
     function submitForm (form, inputsArr) {
         form.addEventListener('submit', function (event) {
-            if (isEmpty(inputArr[0][0])) {
+            if (isEmpty(inputsArr[0][0])) {
                 event.preventDefault();
                 inputsArr[0][0].classList.add('invalid');
                 inputsArr[0][0].focus();
