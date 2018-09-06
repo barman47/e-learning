@@ -67,7 +67,7 @@ router.post('/register', (req, res) => {
                     if (err) {
                         return console.log(err);
                     } else {
-                        req.flash('success', 'Registration Successful. You now have complete Access to all our Services.');
+                        req.flash('success', 'Registration Successful. You now have Unlimited Access to all our Study Materials.');
                         res.redirect('/');
                     }   
                 });
@@ -82,7 +82,8 @@ router.post('/login', (req, res, next) => {
             return next(err);
         }
         if (!student) {
-            return res.end();
+            req.flash('failure', 'Incorrect Email or Password.');
+            return res.redirect('/');
         }
 
         req.logIn(student, (err) => {
@@ -94,7 +95,6 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/dashboard/:id', (req, res) => {
-    console.log(req.params);
     res.render('studentDashboard', {
         title: 'Student Dashboard',
         style: '/css/studentDashboard.css',

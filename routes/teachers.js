@@ -80,6 +80,32 @@ router.post('/login', (req, res, next) => {
         if (err) {
             return next(err);
         }
+        if (!teacher) {
+            req.flash('failure', 'Incorrect Email or Password.');
+            return res.redirect('/');
+        }
+
+        req.logIn(teacher, (err) => {
+            let id = teacher._id;
+            id = mongoose.Types.ObjectId(id); 
+            res.redirect(`/teachers/dashboard/${id}`);
+        });
+    })(req, res, next);
+});
+
+router.get('/dashboard/:id', (req, res) => {
+    res.render('teacherDashboard', {
+        title: 'Teacher Dashboard',
+        style: '/css/teacherDashboard.css',
+        script: '/js/teacherDashboard.js'
+    });
+});
+
+router.post('/login', (req, res, next) => {
+    passport.authenticate('teacher', (err, teacher, info) => {
+        if (err) {
+            return next(err);
+        }
 
         if (!teacher) {
             //req.flash('failure', 'Incorrect email or password!');

@@ -129,9 +129,6 @@ $(document).ready(function () {
     $('.modal').modal({
         preventScrolling: true
     });
-    $('.tooltipped').tooltip({
-        html: '<span style="color: orange;">Close</span>'
-    });
     $('#top').on('click', function (event) {
         if (this.hash !== '') {
             event.preventDefault();
