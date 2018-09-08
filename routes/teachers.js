@@ -101,26 +101,4 @@ router.get('/dashboard/:id', (req, res) => {
     });
 });
 
-router.post('/login', (req, res, next) => {
-    passport.authenticate('teacher', (err, teacher, info) => {
-        if (err) {
-            return next(err);
-        }
-
-        if (!teacher) {
-            //req.flash('failure', 'Incorrect email or password!');
-            res.send('Incorrect Email or Password');
-            next();
-        }
-        req.logIn(teacher, (err) => {
-            let id = teacher._id;
-            id = mongoose.Types.ObjectId(id);
-            res.send('Teacher Logged In');
-            //return res.redirect()
-            next();
-        });
-    })(req, res, next);
-});
-
-
 module.exports = router;
