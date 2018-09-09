@@ -20,6 +20,11 @@ $(document).ready(function () {
 
     var emailRegExp = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
 
+    var preloaders = {
+        student: $('#studentPreloader'),
+        teacher: $('#teacherPreloader'),
+    };
+
     const url = '/students/login';
     let data = {
         studentEmail: $('#studentEmail').val(),
@@ -29,9 +34,10 @@ $(document).ready(function () {
     function ajaxLogin (form) {
         $.ajax(url, {
             type: 'POST',
-            data
-        }).success(function () {
-            form.reset();
+            data,
+            succes: success(function () {
+                form.reset();
+            })
         }).fail(function () {
             M.toast({
                 html: 'Invalid Email or Password!'
@@ -59,7 +65,8 @@ $(document).ready(function () {
                 inputsArr[1][0].classList.add('invalid');
                 inputsArr[1][0].focus();
             } else {
-                document.querySelector('.preloader').style.display = 'block';
+                document.querySelector('#studentPreloader').style.display = 'block';
+                document.querySelector('#teacherPreloader').style.display = 'block';
                 form.disabled = true;
                 setTimeout(function () {
                     ajaxLogin(form);

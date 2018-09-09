@@ -5,6 +5,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 
 let Teacher = require('../models/teacher');
+let Question = require('../models/question');
 
 router.get('/register', (req, res) => {
     res.render('teacherSignup', {
@@ -94,10 +95,25 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/dashboard/:id', (req, res) => {
-    res.render('teacherDashboard', {
-        title: 'Teacher Dashboard',
-        style: '/css/teacherDashboard.css',
-        script: '/js/teacherDashboard.js'
+    Question.find({}, (err, question) => {
+        if (err) {
+            return console.log(err);
+        }
+        Teacher.findOne({_id: req.params.id}, (err, teacher) => {
+            if (err) {
+                return console.log(err);
+            } else {
+                var teacherName = teacher.name;
+                console.log(teacherName);
+                res.render('teacherDashboard', {
+                    title: 'Teacher Dashboard',
+                    style: '/css/teacherDashboard.css',
+                    script: '/js/teacherDashboard.js',
+                    question,
+                    name: teacherName
+                });
+            }
+        });
     });
 });
 

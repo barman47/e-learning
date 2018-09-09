@@ -94,7 +94,14 @@ form {
 	margin-right: auto !important;
 }
 
-.preloader {
+#studentPreloader {
+	position: relative;
+	top: 40px;
+	z-index: 99;
+	display: none;
+}
+
+#teacherPreloader {
 	position: relative;
 	top: 40px;
 	z-index: 99;

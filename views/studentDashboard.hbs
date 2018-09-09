@@ -42,7 +42,7 @@
     </ul>
 
     <ul id="mobile-menu" class="sidenav">
-        <li><a href="#" class="dropdown-links"><i class="green-text text-darken-2 mdi mdi-home"></i>Home</a></li>
+        <li><a href="/" class="dropdown-links"><i class="green-text text-darken-2 mdi mdi-home"></i>Home</a></li>
         <li><div class="divider"></div></li>
         <li><a class="dropdown-trigger" data-target="mobile-courses-dropdown"><i class="green-text text-darken-2 mdi mdi-google-pages"></i>Courses</a></li>
         <li class="active"><a href="">My Dashboard<i class="green-text text-darken-2 mdi mdi-google-pages"></i></a></li>
@@ -50,6 +50,7 @@
     </ul>
 </div>
 <div class="container">
+    <h5 id="welcomeMessage">Welcome back {{name}}</h5>
     <h3 class="green-text text-darken-2 center">Study Materials</h3>
     <ul id="computer-courses" class="scrollspy collection with-header">
         <li class="collection-header  darken-4">Computer Studies</li>
@@ -118,15 +119,13 @@
                 <i class="mdi mdi-close mdi-24px modal-close right"></i>
                 <h3 id="questionHeader">Ask A Question</h3>
                 <p>Teachers are just a click away from providing answers to your most in intriguing questions.</p>
-                <form name="questionForm" action="" method="POST">
-                    <div class="input-field">
-                        <textarea name="question" id="question" class="materialize-textarea"></textarea>
-                        <label for="question">Your Question here...</label>
-                    </div>
-                    <div class="input-field">
-                        <button type="submit" id="askQuestionButton" class="btn green darken-2">Send</button>
-                    </div>
-                </form>
+                <div class="input-field">
+                    <textarea name="question" id="question" class="materialize-textarea"></textarea>
+                    <label for="question">Your Question here...</label>
+                </div>
+                <div class="input-field">
+                    <button type="submit" id="askQuestionButton" data-name="{{name}}" class="btn green darken-2">Send</button>
+                </div>
             </div>
         </div>
     </div>

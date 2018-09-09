@@ -54,27 +54,25 @@ header, main {
 	padding-left: 300px;
 }
 
-#welcomeMessage {
-	background-color: rgba(50, 128, 54, 0.6);
-	color: #ffffff;
-	text-align: center;
-	font-size: 100%;
-	padding: 15px;
-}
-
 .collection-header {
-	background-color: #328036 !important;
-	color: #ffffff;
+    background-color: #328036 !important;
+    color: #ffffff;
 }
 
-.collection-item:hover {
-	background-color: #f5f5f5 !important;
-}
-
-#questionHeader {
+/* #questionHeader {
 	color: rgba(0, 0, 0, 0.5);
+} */
+
+.dropdown-content li>a, .dropdown-content li>span {
+    color: #328036;
 }
 
 .mdi-close:hover {
 	color: #328036;
+}
+
+.faqs {
+	border: 2px solid #f1f1f1;
+	padding-left: 10px;
+	padding-right: 10px;
 }

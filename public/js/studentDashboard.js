@@ -30,21 +30,7 @@ $(document).ready(function () {
         }
     };
 
-    var forms = {
-        question: document.forms.questionForm
-    };
-
-    var question = [
-        forms.question
-    ]
-
-    var textareas = [
-        forms.question.question
-    ]
-
-    var submitButtons = [
-        document.querySelector('#askQuestionButton')
-    ]
+    var submitButton = document.querySelector('#askQuestionButton');
 
     function isEmpty (element) {
         if (element.value === '' || element.value.trim() === '') {
@@ -54,34 +40,35 @@ $(document).ready(function () {
         }
     }
 
-    function addFormEvent (form, textarea) {
-        form.addEventListener('submit', function (event) {
+    function addButtonEvent (button, textarea) {
+        button.addEventListener('click', function (event) {
             if (isEmpty(textarea)) {
-                event.preventDefault();
                 M.toast({
                     html: 'Please enter your question.'
                 });
                 textarea.focus()
             } else {
-                alert('Message Sent');
-                form.reset();
+                var data = {
+                    question: $('#question').val(),
+                    name: event.target.dataset.name
+                }
+                const url = '/students/askQuestion';
+
+                $.ajax(url, {
+                    type: 'POST',
+                    data,
+                    success: (function () {
+                        M.toast({html: 'Question sent successfully'});
+                        textarea.value = '';
+                    })
+                }).fail(function () {
+                    M.toast({
+                        html: 'Error! Question not sent'
+                    });
+                });
             }
         }, false);
     }
 
-    // function addButtonEvent (button, textarea) {
-    //     button.addEventListener('click', function (event) {
-    //         if (isEmpty(textarea)) {
-    //             event.preventDefault();
-    //             M.toast({
-    //                 html: 'Please enter your question.'
-    //             });
-    //             textarea.focus()
-    //         } else {
-    //             alert('Message Sent');
-    //         }
-    //     }, false);
-    // }
-
-    addFormEvent(forms.question, textareas[0]);
+    addButtonEvent(submitButton, question);
 });

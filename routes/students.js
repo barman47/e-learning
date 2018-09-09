@@ -5,6 +5,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 
 let Student = require('../models/student');
+let Question = require('../models/question');
 
 router.get('/register', (req, res) => {
     res.render('studentSignup', {
@@ -95,11 +96,43 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/dashboard/:id', (req, res) => {
-    res.render('studentDashboard', {
-        title: 'Student Dashboard',
-        style: '/css/studentDashboard.css',
-        script: '/js/studentDashboard.js'
+    let query = {_id: req.params.id};
+    Student.findOne(query, (err, student) => {
+        if (err) {
+            return console.log(err);
+        }
+        let studentData = student;
+        res.render('studentDashboard', {
+            title: 'Student Dashboard',
+            style: '/css/studentDashboard.css',
+            script: '/js/studentDashboard.js',
+            student: studentData,
+            name: studentData.name,
+        });
     });
+});
+
+router.post('/askQuestion', (req, res) => {
+    const body = req.body;
+    let data =  {
+        question: body.question,
+        name: body.name
+    };
+
+    let question = new Question({
+        questionAsked: data.question,
+        askedBy: data.name
+    });
+
+    question.save((err) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            console.log('Question asked successfully');
+            res.end();
+        }
+    });
+    res.end();
 });
 
 module.exports = router;
