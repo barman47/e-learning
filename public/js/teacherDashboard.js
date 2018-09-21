@@ -41,7 +41,7 @@ $(document).ready(function () {
     var answer = document.querySelector('.answer');
     var answerButton = document.querySelector('.answerBtn');
 
-    var url = '/upload';
+    var url = '/upload/';
     data = {
         subject: subjectCategory,
         file: file.value
@@ -51,7 +51,7 @@ $(document).ready(function () {
         if (isEmpty(uploadField) || subjectCategory.value === "") {
             event.preventDefault();
             M.toast({html: 'Please provide a file to upload and select a subject category'});
-        }// else {
+        } //else {
         //     event.preventDefault();
         //     $.ajax(url, {
         //         method: 'POST',

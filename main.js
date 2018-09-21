@@ -23,47 +23,47 @@ const teachers = require('./routes/teachers');
 const PORT = process.env.PORT || 3200;
 const publicPath = path.join(__dirname, 'public');
 
-// const mongoURI = config.database;
+const mongoURI = config.database;
 
-// mongoose.connect(config.database, {
-//     useNewUrlParser: true
-// });
+mongoose.connect(config.database, {
+    useNewUrlParser: true
+});
 
-// let conn = mongoose.connection;
+let conn = mongoose.connection;
 
-// // let gfs;
+let gfs;
 
-// conn.once('open', () => {
-//     console.log('Database Connection Established Successfully.');
-//     //Initialize Stream
-//     // gfs = Grid(conn.db, mongoose.mongo);
-//     // gfs.collection('books');
-// });
+conn.once('open', () => {
+    console.log('Database Connection Established Successfully.');
+    //Initialize Stream
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection('books');
+});
 
-// conn.on('error', (err) => {
-//     console.log(err);
-// });
+conn.on('error', (err) => {
+    console.log(err);
+});
 
-// // Create Storage engine
-// const storage = new GridFsStorage({
-//     url: mongoURI,
-//      file: (req, file) => {
-//          return new Promise((resolve, reject) => {
-//              crypto.randomBytes(16, (err, buf) => {
-//                  if (err) {
-//                      return reject(err);
-//                  }
-//                  const filename = buf.toString('hex') + path.extname(file.originalname);
-//                  const fileInfo = {
-//                      filename: filename,
-//                      bucketName: 'books'
-//                  };
-//                  resolve(fileInfo);
-//             });
-//         });
-//     }
-// });
-// const upload = multer({ storage });
+// Create Storage engine
+const storage = new GridFsStorage({
+    url: mongoURI,
+     file: (req, file) => {
+         return new Promise((resolve, reject) => {
+             crypto.randomBytes(16, (err, buf) => {
+                 if (err) {
+                     return reject(err);
+                 }
+                 const filename = buf.toString('hex') + path.extname(file.originalname);
+                 const fileInfo = {
+                     filename: filename,
+                     bucketName: 'books'
+                 };
+                 resolve(fileInfo);
+            });
+        });
+    }
+});
+const upload = multer({ storage });
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
@@ -132,29 +132,35 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('*', function(req, res){
+    res.status(404).render('404', {
+        title: 'Error 404'
+    });
+});
+
 // @route POST /upload
 // @desc Uploads file to DB
-// app.post('/upload/:id', upload.single('file'), (req, res) => {
-//     const teacherId = req.params.id;
-//     console.log('File uploaded');
-//     // res.json({file: req.file
-//     req.flash('success', 'File uploaded Sucessfully');
-//     res.redirect(`/teachers/dashboard/${teacherId}`);
-// });
+app.post('/upload/:id', upload.single('file'), (req, res) => {
+    const teacherId = req.params.id;
+    console.log('File uploaded');
+    // res.json({file: req.file
+    req.flash('success', 'File uploaded Sucessfully');
+    res.redirect(`/teachers/dashboard/${teacherId}`);
+});
 
-// // @route GET /books
-// // @desc Display all books in JSON
-// app.get('/books', (req, res) => {
-//     gfs.collection('books');
-//     gfs.files.find().toArray((err, books) => {
-//         if (!books || books.length === 0) {
-//             return res.status(404).json({
-//                 err: 'No files exist'
-//             });
-//         }
-//         return res.json(books);
-//     });
-// });
+// @route GET /books
+// @desc Display all books in JSON
+app.get('/books', (req, res) => {
+    gfs.collection('books');
+    gfs.files.find().toArray((err, books) => {
+        if (!books || books.length === 0) {
+            return res.status(404).json({
+                err: 'No files exist'
+            });
+        }
+        return res.json(books);
+    });
+});
 
 app.listen(PORT, () => {
     console.log(`Server is up on Port ${PORT}...`);
