@@ -3,9 +3,56 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const mongoose = require('mongoose');
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
+const crypto = require('crypto');
+const path = require('path');
 
+const config = require('../config/database');
 let Teacher = require('../models/teacher');
+let Student = require('../models/student');
 let Question = require('../models/question');
+let File = require('../models/file');
+
+const mongoURI = config.database;
+
+mongoose.connect(config.database, {
+    useNewUrlParser: true
+});
+
+let conn = mongoose.connection;
+
+let gfs;
+
+conn.once('open', () => {
+    console.log('Teacher Database Connection Established Successfully.');
+    //Initialize Stream
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection('books');
+
+});
+
+// Create Storage engine
+const storage = new GridFsStorage({
+    url: mongoURI,
+     file: (req, file) => {
+         return new Promise((resolve, reject) => {
+             crypto.randomBytes(16, (err, buf) => {
+                 if (err) {
+                     return reject(err);
+                 }
+                 const filename = buf.toString('hex') + path.extname(file.originalname);
+                 const fileInfo = {
+                     filename: filename,
+                     bucketName: 'books'
+                 };
+                 resolve(fileInfo);
+            });
+        });
+    }
+});
+const upload = multer({ storage });
 
 router.get('/register', (req, res) => {
     res.render('teacherSignup', {
@@ -67,7 +114,7 @@ router.post('/register', (req, res) => {
                     if (err) {
                         return console.log(err);
                     } else {
-                        req.flash('success', 'Registration Successful. You now Log in.');
+                        req.flash('success', 'Registration Successful. You can now Log in.');
                         res.redirect('/');
                     }
                 });
@@ -88,7 +135,7 @@ router.post('/login', (req, res, next) => {
 
         req.logIn(teacher, (err) => {
             let id = teacher._id;
-            id = mongoose.Types.ObjectId(id); 
+            id = mongoose.Types.ObjectId(id);
             res.redirect(`/teachers/dashboard/${id}`);
         });
     })(req, res, next);
@@ -103,17 +150,86 @@ router.get('/dashboard/:id', (req, res) => {
             if (err) {
                 return console.log(err);
             } else {
-                var teacherName = teacher.name;
-                console.log(teacherName);
-                res.render('teacherDashboard', {
-                    title: 'Teacher Dashboard',
-                    style: '/css/teacherDashboard.css',
-                    script: '/js/teacherDashboard.js',
-                    question,
-                    name: teacherName
+                Student.find({}, (err, student) => {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    let teacherName = teacher.name;
+                    res.render('teacherDashboard', {
+                        title: 'Teacher Dashboard',
+                        style: '/css/teacherDashboard.css',
+                        script: '/js/teacherDashboard.js',
+                        question,
+                        name: teacherName,
+                        id: teacher._id,
+                        student
+                    });
                 });
             }
         });
+    });
+});
+
+router.get('/courses/:category', (req, res) => {
+    console.log(req.params.category);
+    File.find({category: req.params.category}, (err, file) => {
+        if (err) {
+            return console.log(err);
+        }
+        if (!file) {
+            return console.log('No file exists');
+        } else {
+            console.log(file._id);
+            gfs.collection('books');
+            gfs.files.find({_id: file._id}).toArray((err, books) => {
+                if (!books || books.length === 0) {
+                    return res.status(404).json({
+                        err: 'No files exist'
+                    });
+                }
+                return res.json(books);
+            });
+        }
+    });
+
+});
+
+// @route POST /upload
+// @desc Uploads file to DB
+router.post('/upload/:id', upload.single('file'), (req, res) => {
+    const teacherId = req.params.id;
+    let fileId = req.file.id;
+    fileId = mongoose.Types.ObjectId(fileId);
+    const category = req.body.subjectCategory;
+
+    let file = new File({
+        _id: fileId,
+        category
+    });
+
+    file.save((err) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            console.log('File uploaded');
+            req.flash('success', 'File uploaded Sucessfully');
+            res.redirect(`/teachers/dashboard/${teacherId}`);
+        }
+    });
+
+});
+
+// @route GET /books
+// @desc Display all books in JSON
+router.get('/books', (req, res) => {
+    gfs.collection('books');
+    gfs.files.find().toArray((err, books) => {
+        if (!books || books.length === 0) {
+            return res.status(404).json({
+                err: 'No files exist'
+            });
+        }
+        return res.json(books);
     });
 });
 

@@ -1,17 +1,17 @@
 <div id="navigation" class="scrollspy">
     <nav class="pushpin green darken-2">
         <ul id="courses-dropdown" class="dropdown-content">
-            <li><a class="dropdown-links" href="#computer-courses">Computer Studies</a></li>
+            <li><a class="dropdown-links" href="/teachers/courses/computer">Computer Studies</a></li>
             <li class="divider"></li>
-            <li><a class="dropdown-links" href="#commerce-courses">Commerce</a></li>
+            <li><a class="dropdown-links" href="/teachers/courses/commerce">Commerce</a></li>
             <li class="divider"></li>
-            <li><a class="dropdown-links" href="#biology-courses">Biology</a></li>
+            <li><a class="dropdown-links" href="/teachers/courses/biology">Biology</a></li>
             <li class="divider"></li>
-            <li><a class="dropdown-links" href="#chemistry-courses">Chemistry</a></li>
+            <li><a class="dropdown-links" href="/teachers/courses/chemistry">Chemistry</a></li>
             <li class="divider"></li>
-            <li><a class="dropdown-links" href="#physics-courses">Physics</a></li>
+            <li><a class="dropdown-links" href="/teachers/courses/physics">Physics</a></li>
             <li class="divider"></li>
-            <li><a class="dropdown-links" href="#crs-courses">Christian Religious Studies</a></li>
+            <li><a class="dropdown-links" href="/teachers/courses/crs">Christian Religious Studies</a></li>
         </ul>
 
         <div class="nav-wrapper">
@@ -28,17 +28,17 @@
         </div>
     </nav>
     <ul id="mobile-courses-dropdown" class="dropdown-content">
-        <li><a class="dropdown-links" href="#computer-courses">Computer Studies</a></li>
+        <li><a class="dropdown-links" href="/teachers/courses/computer">Computer Studies</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-links" href="#commerce-courses">Commerce</a></li>
+        <li><a class="dropdown-links" href="/teachers/courses/commerce">Commerce</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-links" href="#biology-courses">Biology</a></li>
+        <li><a class="dropdown-links" href="/teachers/courses/biology">Biology</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-links" href="#chemistry-courses">Chemistry</a></li>
+        <li><a class="dropdown-links" href="/teachers/courses/chemistry">Chemistry</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-links" href="#physics-courses">Physics</a></li>
+        <li><a class="dropdown-links" href="/teachers/courses/physics">Physics</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-links" href="#crs-courses">Christian Religious Studies</a></li>
+        <li><a class="dropdown-links" href="/teachers/courses/crs">Christian Religious Studies</a></li>
     </ul>
 
     <ul id="mobile-menu" class="sidenav">
@@ -52,38 +52,16 @@
 
 <h3 class="green-text text-darken-2 center">Teacher Dashboard</h3>
 
-<div class="container">
-    <ul class="collection with-header">
-        <li class="collection-header"><h4><i class="mdi mdi-human-male"></i>Students</h4></li>
-        <li class="collection-item">Student 1</li>
-        <li class="collection-item">Student 2</li>
-        <li class="collection-item">Student 3</li>
-        <li class="collection-item">Student 4</li>
-        <li class="collection-item">Student 5</li>
-        <li class="collection-item">Student 6</li>
-    </ul>
-</div>
-
-<div class="container">
-    <br>
-    <br>
-    <hr>
-    <br>
-    <br>
-    <br>
-</div>
-
-<div class="container">
-    <ul class="collection with-header">
-        <li class="collection-header"><h4><i class="mdi mdi-book-open-page-variant"></i>Courses</h4></li>
-        <li class="collection-item">Course 1</li>
-        <li class="collection-item">Course 2</li>
-        <li class="collection-item">Course 3</li>
-        <li class="collection-item">Course 4</li>
-        <li class="collection-item">Course 5</li>
-        <li class="collection-item">Course 6</li>
-    </ul>
-</div>
+{{#if student}}
+    <div class="container">
+        <ul class="collection with-header">
+            <li class="collection-header"><h4><i class="mdi mdi-human-male"></i>Students</h4></li>
+            {{#each student}}
+                <li class="collection-item">{{this.name}}</li>
+            {{/each}}
+        </ul>
+    </div>
+{{/if}}
 
 <div class="container">
     <br>
@@ -135,28 +113,27 @@
             <div class="col s12">
                 <i class="mdi mdi-close mdi-24px modal-close right"></i>
                 <h3 id="uploadHeader">Upload Study Material</h3>
-                <form name="uploadForm" action="" method="POST">
+                <form name="uploadForm" action="/teachers/upload/{{id}}" method="POST" enctype="multipart/form-data">
                     <div class="file-field input-field">
-                        <div class="btn green darken-2"><span>File</span><input type="file"></div>
+                        <div class="btn green darken-2"><span>File</span><input type="file" name="file"></div>
                         <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text" placeholder="Provide a file for upload">
+                            <input class="file-path validate" type="text" name="fileField" placeholder="Provide a file for upload">
                         </div>
                     </div>
-                    
+
                     <div class="input-field">
-                        <select>
+                        <select name="subjectCategory">
                             <option disabled selected value="">Choose a Subject Category</option>
-                            <option value="1">Computer Studies</option>
-                            <option value="2">Commerce</option>
-                            <option value="3">Biology</option>
-                            <option value="4">Chemistry</option>
-                            <option value="5">Physics</option>
-                            <option value="6">Christian Religious Studies</option>
+                            <option value="computer">Computer Studies</option>
+                            <option value="commerce">Commerce</option>
+                            <option value="biology">Biology</option>
+                            <option value="chemistry">Chemistry</option>
+                            <option value="physics">Physics</option>
+                            <option value="crs">Christian Religious Studies</option>
                         </select>
-                        <label>Select Subject:</label>
                     </div>
                     <div class="input-field">
-                        <button type="submit" id="askQuestionButton" class="btn green darken-2"><i class="mdi mdi-upload"></i>Upload</button>
+                        <button type="submit" id="uploadButton" class="btn green darken-2"><i class="mdi mdi-upload"></i>Upload</button>
                     </div>
                 </form>
             </div>

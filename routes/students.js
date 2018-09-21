@@ -3,9 +3,54 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const mongoose = require('mongoose');
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
+const crypto = require('crypto');
+const path = require('path');
+
+const config = require('../config/database');
 
 let Student = require('../models/student');
 let Question = require('../models/question');
+
+const mongoURI = config.database;
+
+mongoose.connect(config.database, {
+    useNewUrlParser: true
+});
+
+let conn = mongoose.connection;
+
+let gfs;
+
+conn.once('open', () => {
+    console.log('Student Database Conection Established Successfully');
+    //Initialize Stream
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection('books');
+});
+
+// Create Storage engine
+const storage = new GridFsStorage({
+    url: mongoURI,
+     file: (req, file) => {
+         return new Promise((resolve, reject) => {
+             crypto.randomBytes(16, (err, buf) => {
+                 if (err) {
+                     return reject(err);
+                 }
+                 const filename = buf.toString('hex') + path.extname(file.originalname);
+                 const fileInfo = {
+                     filename: filename,
+                     bucketName: 'books'
+                 };
+                 resolve(fileInfo);
+            });
+        });
+    }
+});
+const upload = multer({ storage });
 
 router.get('/register', (req, res) => {
     res.render('studentSignup', {
@@ -100,15 +145,27 @@ router.get('/dashboard/:id', (req, res) => {
     Student.findOne(query, (err, student) => {
         if (err) {
             return console.log(err);
+        } else {
+            let studentData = student;
+            gfs.collection('books');
+            gfs.files.find().toArray((err, books) => {
+                if (!books || books.length === 0) {
+                    return res.status(404).json({
+                        err: 'No files exist'
+                    });
+                }
+                console.log(books);
+                res.render('studentDashboard', {
+                    title: 'Student Dashboard',
+                    style: '/css/studentDashboard.css',
+                    script: '/js/studentDashboard.js',
+                    student: studentData,
+                    name: studentData.name,
+                    books
+                });
+            });
+            
         }
-        let studentData = student;
-        res.render('studentDashboard', {
-            title: 'Student Dashboard',
-            style: '/css/studentDashboard.css',
-            script: '/js/studentDashboard.js',
-            student: studentData,
-            name: studentData.name,
-        });
     });
 });
 
