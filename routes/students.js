@@ -100,24 +100,43 @@ router.post('/register', (req, res) => {
             gender: newStudent.gender
         });
 
-        bcrypt.genSalt(10, (err, salt) => {
+        Student.findOne({email: student.email}, (err, returnedStudent) => {
             if (err) {
                 return console.log(err);
-            }
-            bcrypt.hash(student.password, salt, (err, hash) => {
-                if (err) {
-                    return console.log(err);
-                }
-                student.password = hash;
-                student.save((err) => {
+            } else if (returnedStudent) {
+                res.render('studentSignup', {
+                    title: 'Student Signup',
+                    style: '/css/signup.css',
+                    script: '/js/signup.js',
+                    error: 'Username already taken',
+                    firstName: newStudent.firstName,
+                    lastName: newStudent.lastName,
+                    email: newStudent.email,
+                    password: newStudent.password,
+                    confirmPassword: newStudent.confirmPassword,
+                    gender: newStudent.gender
+                });
+            } else {
+                bcrypt.genSalt(10, (err, salt) => {
                     if (err) {
                         return console.log(err);
-                    } else {
-                        req.flash('success', 'Registration Successful. You now have Unlimited Access to all our Study Materials.');
-                        res.redirect('/');
-                    }   
+                    }
+                    bcrypt.hash(student.password, salt, (err, hash) => {
+                        if (err) {
+                            return console.log(err);
+                        }
+                        student.password = hash;
+                        student.save((err) => {
+                            if (err) {
+                                return console.log(err);
+                            } else {
+                                req.flash('success', 'Registration Successful. You now have Unlimited Access to all our Study Materials.');
+                                res.redirect('/');
+                            }   
+                        });
+                    });
                 });
-            });
+            }
         });
     }
 });
@@ -190,6 +209,12 @@ router.post('/askQuestion', (req, res) => {
         }
     });
     res.end();
+});
+
+router.get('/logout', (req, res) => {
+    req.logOut();
+    req.flash('success', 'Your are logged out');
+    res.redirect('/');
 });
 
 module.exports = router;

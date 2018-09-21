@@ -100,25 +100,43 @@ router.post('/register', (req, res) => {
             password: newTeacher.password,
             gender: newTeacher.gender
         });
-
-        bcrypt.genSalt(10, (err, salt) => {
+        
+        Teacher.findOne({email: teacher.email}, (err, returnedTeacher) => {
             if (err) {
                 return console.log(err);
-            }
-            bcrypt.hash(teacher.password, salt, (err, hash) => {
-                if (err) {
-                    return console.log(err);
-                }
-                teacher.password = hash;
-                teacher.save((err) => {
+            } else if (returnedTeacher) {
+                res.render('teacherSignup', {
+                    title: 'Teacher Sign up',
+                    style: '/css/signup.css',
+                    script: '/js/signup.js',
+                    error: 'Teacher already exists!',
+                    firstName: newTeacher.firstName,
+                    lastName: newTeacher.lastName,
+                    email: newTeacher.email,
+                    password: newTeacher.password,
+                    confirmPassword: newTeacher.confirmPassword
+                });
+            } else {
+                bcrypt.genSalt(10, (err, salt) => {
                     if (err) {
                         return console.log(err);
-                    } else {
-                        req.flash('success', 'Registration Successful. You can now Log in.');
-                        res.redirect('/');
                     }
+                    bcrypt.hash(teacher.password, salt, (err, hash) => {
+                        if (err) {
+                            return console.log(err);
+                        }
+                        teacher.password = hash;
+                        teacher.save((err) => {
+                            if (err) {
+                                return console.log(err);
+                            } else {
+                                req.flash('success', 'Registration Successful. You can now Log in.');
+                                res.redirect('/');
+                            }
+                        });
+                    });
                 });
-            });
+            }
         });
     }
 });
@@ -231,6 +249,12 @@ router.get('/books', (req, res) => {
         }
         return res.json(books);
     });
+});
+
+router.get('/logout', (req, res) => {
+    req.logOut();
+    req.flash('success', 'Your are logged out');
+    res.redirect('/');
 });
 
 module.exports = router;
