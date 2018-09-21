@@ -169,19 +169,26 @@ router.get('/dashboard/:id', (req, res) => {
             gfs.collection('books');
             gfs.files.find().toArray((err, books) => {
                 if (!books || books.length === 0) {
-                    return res.status(404).json({
-                        err: 'No files exist'
+                    console.log('No files exist');
+                    res.render('studentDashboard', {
+                        title: 'Student Dashboard',
+                        style: '/css/studentDashboard.css',
+                        script: '/js/studentDashboard.js',
+                        student: studentData,
+                        name: studentData.name,
+                        books
+                    });
+                } else {
+                    res.render('studentDashboard', {
+                        title: 'Student Dashboard',
+                        style: '/css/studentDashboard.css',
+                        script: '/js/studentDashboard.js',
+                        student: studentData,
+                        name: studentData.name,
+                        books
                     });
                 }
                 console.log(books);
-                res.render('studentDashboard', {
-                    title: 'Student Dashboard',
-                    style: '/css/studentDashboard.css',
-                    script: '/js/studentDashboard.js',
-                    student: studentData,
-                    name: studentData.name,
-                    books
-                });
             });
             
         }
