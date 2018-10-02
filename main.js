@@ -128,7 +128,8 @@ app.get('/', (req, res) => {
     res.render('home', {
         title: 'Edufy - Home',
         style: 'css/index.css',
-        script: 'js/home.js'
+        script: 'js/home.js',
+        script2: 'js/teacherLogin.js'
     });
 });
 
@@ -148,7 +149,7 @@ app.post('/upload/:id', upload.single('file'), (req, res) => {
     res.redirect(`/teachers/dashboard/${teacherId}`);
 });
 
-// @route GET /books
+// @route GET /books 
 // @desc Display all books in JSON
 app.get('/books', (req, res) => {
     gfs.collection('books');

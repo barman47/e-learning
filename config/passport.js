@@ -5,11 +5,11 @@ const bcrypt = require('bcryptjs');
 
 module.exports = (passport) => {
     passport.use('student', new LocalStrategy({
-        usernameField: "studentEmail",
+        usernameField: "regNo",
         passwordField: "studentPassword",
         passReqToCallback: true
-      }, function verifyCallback(req, studentEmail, studentPassword, done) {
-            Student.findOne({ email: studentEmail }, function(err, student) {
+      }, function verifyCallback(req, regNo, studentPassword, done) {
+            Student.findOne({ regNo: regNo }, function(err, student) {
             if (err) return done(err);
             if (!student) {
                 return done(null, false, {msg: 'No student found'});
@@ -26,11 +26,11 @@ module.exports = (passport) => {
     }));
 
     passport.use('teacher', new LocalStrategy({
-        usernameField: 'teacherEmail',
+        usernameField: 'teacherID',
         passwordField: 'teacherPassword',
         passReqToCallback: true
-    }, function verifyCallback (req, teacherEmail, teacherPassword, done) {
-        Teacher.findOne({email: teacherEmail}, (err, teacher) => {
+    }, function verifyCallback (req, teacherID, teacherPassword, done) {
+        Teacher.findOne({teacherID: teacherID}, (err, teacher) => {
             if (err) {
                 return done (err);
             }

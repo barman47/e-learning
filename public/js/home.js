@@ -5,11 +5,11 @@ $(document).ready(function () {
     };
 
     var studentInputs = [
-        [forms.student.studentEmail, document.querySelector('#studentEmailErrorMessage')], 
+        [forms.student.regNo, document.querySelector('#regNoErrorMessage')], 
         [forms.student.studentPassword, document.querySelector('#studentPasswordErrorMessage')]
     ];
     var teacherInputs = [
-        [forms.teacher.teacherEmail, document.querySelector('#teacherEmailErrorMessage')], 
+        [forms.teacher.teacherEmail, document.querySelector('#teacherIDErrorMessage')], 
         [forms.teacher.teacherPassword, document.querySelector('#teacherPasswordErrorMessage')]
     ];
 
@@ -18,23 +18,29 @@ $(document).ready(function () {
         teacher: document.querySelector('#teacherLoginButton')
     };
 
-    var emailRegExp = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
+    var regNoRegExp = /^NASS\/SD\/[0-9]{1,5}$/i;
 
     var preloaders = {
         student: $('#studentPreloader'),
         teacher: $('#teacherPreloader'),
     };
 
-    const url = '/students/login';
-    let data = {
-        studentEmail: $('#studentEmail').val(),
+    const studentUrl = '/students/login';
+    const teacherUrl = '/teachers/login';
+    let studentData = {
+        regNo: $('#regNo').val(),
         studentPassword: $('#studentPassword').val()
     };
 
-    function ajaxLogin (form) {
-        $.ajax(url, {
+    let teacherData = {
+        teacherID: $('#teacherID').val(),
+        studentPassword: $('#teacherPassword').val()
+    };
+
+    function studentAjaxLogin (form) {
+        $.ajax(studentUrl, {
             type: 'POST',
-            data,
+            studentData,
             succes: success(function () {
                 form.reset();
             })
@@ -42,7 +48,20 @@ $(document).ready(function () {
             M.toast({
                 html: 'Invalid Email or Password!'
             });
-            // document.querySelector('#incorrectStudentData').style.display = 'block';
+        });
+    }
+
+    function studentAjaxLogin (form) {
+        $.ajax(teacherUrl, {
+            type: 'POST',
+            studentData,
+            succes: success(function () {
+                form.reset();
+            })
+        }).fail(function () {
+            M.toast({
+                html: 'Invalid ID or Password!'
+            });
         });
     }
 
@@ -69,7 +88,7 @@ $(document).ready(function () {
                 document.querySelector('#teacherPreloader').style.display = 'block';
                 form.disabled = true;
                 setTimeout(function () {
-                    ajaxLogin(form);
+                    studentAjaxLogin(form);
                 }, 2000);
             }
         }, false);
@@ -91,9 +110,9 @@ $(document).ready(function () {
     //     }, false);
     // }
 
-    function addKeyupEvent (emailField) {
-        emailField.addEventListener('keyup', function (event) {
-            if (emailRegExp.test(emailField.value)) {
+    function addKeyupEvent (regNo) {
+        regNo.addEventListener('keyup', function (event) {
+            if (regNoRegExp.test(regNo.value)) {
                 event.target.classList.add('valid');
                 event.target.classList.remove('invalid');
             } else {
@@ -103,15 +122,15 @@ $(document).ready(function () {
         }, false);
     }
 
-    function addFocusoutEvent (emailField) {
-        emailField.addEventListener('focusout', function (event) {
-            if (emailRegExp.test(emailField.value)) {
+    function addFocusoutEvent (regNo) {
+        regNo.addEventListener('focusout', function (event) {
+            if (regNoRegExp.test(regNo.value)) {
                 event.target.classList.add('valid');
                 event.target.classList.remove('invalid');
             } else {
                 event.target.classList.add('invalid');
                 event.target.classList.remove('valid');
-                emailField.focus();
+                regNo.focus();
                 // M.toast({
                 //     html: 'Please provide a valid email to continue.'
                 // });
@@ -124,10 +143,10 @@ $(document).ready(function () {
     submitForm(forms.student, studentInputs);
     //handleButtonClick(buttons.student, studentInputs);
 
-    addKeyupEvent(teacherInputs[0][0]);
-    addFocusoutEvent(teacherInputs[0][0]);
-    submitForm(forms.teacher, teacherInputs);
-    //handleButtonClick(buttons.teacher, teacherInputs);
+    // addKeyupEvent(teacherInputs[0][0]);
+    // addFocusoutEvent(teacherInputs[0][0]);
+    // submitForm(forms.teacher, teacherInputs);
+    // //handleButtonClick(buttons.teacher, teacherInputs);
 
     $('.pushpin').pushpin({
         top: $('.pushpin').offset().top,            

@@ -10,6 +10,11 @@ const StudentSchema = mongoose.Schema({
         required: true
     },
 
+    regNo: {
+        type: String,
+        required: true
+    },
+
     password: {
         type: String,
         required: true

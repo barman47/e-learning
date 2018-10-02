@@ -3,7 +3,9 @@ $(document).ready(function () {
     var inputs = [
         form.firstName,
         form.lastName,
+        form.teacherID,
         form.email,
+        form.regNo,
         form.password,
         form.confirmPassword
     ];
@@ -11,6 +13,7 @@ $(document).ready(function () {
     var submitButton = document.querySelector('button');
 
     var emailRegExp = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
+    var teacherIDRegExp = /^NASS\/TU\/[0-9]{1,5}$/i;
     var passwordRegExp = /^[\w@-]{8,20}$/;
 
     function submitForm (event) {        
@@ -33,6 +36,30 @@ $(document).ready(function () {
     }
 
     function checkInputs () {
+        form.teacherID.addEventListener('keyup', function (event) {
+            if (!teacherIDRegExp.test(event.target.value)) {
+                event.target.classList.add('invalid');
+                event.target.classList.remove('valid');
+            } else {
+                event.target.classList.add('valid');
+                event.target.classList.remove('invalid');
+            }
+        }, false);
+    
+        form.teacherID.addEventListener('focusout', function (event) {
+            if (!teacherIDRegExp.test(event.target.value)) {
+                event.target.classList.add('invalid');
+                event.target.classList.remove('valid');
+                event.target.focus();
+                M.toast({
+                    html: 'Please provide a valid ID Number to continue'
+                });
+            } else {
+                event.target.classList.add('valid');
+                event.target.classList.remove('invalid');
+            }
+        }, false);
+
         form.email.addEventListener('keyup', function (event) {
             if (!emailRegExp.test(event.target.value)) {
                 event.target.classList.add('invalid');

@@ -36,29 +36,30 @@ conn.once('open', () => {
 // Create Storage engine
 const storage = new GridFsStorage({
     url: mongoURI,
-     file: (req, file) => {
-         return new Promise((resolve, reject) => {
-             crypto.randomBytes(16, (err, buf) => {
-                 if (err) {
-                     return reject(err);
-                 }
-                 const filename = buf.toString('hex') + path.extname(file.originalname);
-                 const fileInfo = {
-                     filename: filename,
-                     bucketName: 'books'
-                 };
-                 resolve(fileInfo);
+    file: (req, file) => {
+        return new Promise((resolve, reject) => {
+            crypto.randomBytes(16, (err, buf) => {
+                if (err) {
+                    return reject(err);
+                }
+                const filename = buf.toString('hex') + path.extname(file.originalname);
+                const fileInfo = {
+                    filename: filename,
+                    bucketName: 'books'
+                };
+                resolve(fileInfo);
             });
         });
     }
 });
+
 const upload = multer({ storage });
 
 router.get('/register', (req, res) => {
     res.render('teacherSignup', {
         title: 'Teacher Sign Up',
         style: '/css/signup.css',
-        script: '/js/signup.js'
+        script: '/js/teacherSignup.js'
     });
 });
 
@@ -67,6 +68,7 @@ router.post('/register', (req, res) => {
     const newTeacher = {};
     newTeacher.firstName = body.firstName;
     newTeacher.lastName = body.lastName;
+    newTeacher.teacherID = body.teacherID;
     newTeacher.email = body.email;
     newTeacher.password = body.password;
     newTeacher.confirmPassword = body.confirmPassword;
@@ -74,6 +76,7 @@ router.post('/register', (req, res) => {
 
     req.checkBody('firstName', 'First Name is required').notEmpty();
     req.checkBody('lastName', 'Last Name is required').notEmpty();
+    req.checkBody('teacherID', 'Teacher ID Number is required').notEmpty();
     req.checkBody('email', 'Invalid Email Address').isEmail();
     req.checkBody('password', 'Password is required').notEmpty();
     req.checkBody('confirmPassword', 'Passwords do not match!').equals(newTeacher.password);
@@ -85,10 +88,11 @@ router.post('/register', (req, res) => {
         res.render('teacherSignup', {
             title: 'Teacher Sign up',
             style: '/css/signup.css',
-            script: '/js/signup.js',
+            script: '/js/teacherSignup.js',
             errors: errors,
             firstName: newTeacher.firstName,
             lastName: newTeacher.lastName,
+            teacherID: newTeacher.teacherID,
             email: newTeacher.email,
             password: newTeacher.password,
             confirmPassword: newTeacher.confirmPassword
@@ -96,22 +100,24 @@ router.post('/register', (req, res) => {
     } else {
         let teacher = new Teacher({
             name: `${newTeacher.firstName} ${newTeacher.lastName}`,
+            teacherID: newTeacher.teacherID,
             email: newTeacher.email,
             password: newTeacher.password,
             gender: newTeacher.gender
         });
         
-        Teacher.findOne({email: teacher.email}, (err, returnedTeacher) => {
+        Teacher.findOne({teacherID: teacher.teacherID}, (err, returnedTeacher) => {
             if (err) {
                 return console.log(err);
             } else if (returnedTeacher) {
                 res.render('teacherSignup', {
                     title: 'Teacher Sign up',
                     style: '/css/signup.css',
-                    script: '/js/signup.js',
+                    script: '/js/teacherSignup.js',
                     error: 'Teacher already exists!',
                     firstName: newTeacher.firstName,
                     lastName: newTeacher.lastName,
+                    teacherID: newTeacher.teacherID,
                     email: newTeacher.email,
                     password: newTeacher.password,
                     confirmPassword: newTeacher.confirmPassword
@@ -147,7 +153,7 @@ router.post('/login', (req, res, next) => {
             return next(err);
         }
         if (!teacher) {
-            req.flash('failure', 'Incorrect Email or Password.');
+            req.flash('failure', 'Incorrect ID Number or Password.');
             return res.redirect('/');
         }
 
@@ -247,7 +253,10 @@ router.get('/books', (req, res) => {
                 err: 'No files exist'
             });
         }
-        return res.json(books);
+        // return res.json(books);
+        res.render('books', {
+            books
+        });
     });
 });
 

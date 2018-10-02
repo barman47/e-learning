@@ -56,7 +56,7 @@ router.get('/register', (req, res) => {
     res.render('studentSignup', {
         title: 'Student Signup',
         style: '/css/signup.css',
-        script: '/js/signup.js'
+        script: '/js/studentSignup.js'
     });
 });
 
@@ -65,6 +65,7 @@ router.post('/register', (req, res) => {
     const newStudent = {
         firstName: body.firstName,
         lastName: body.lastName,
+        regNo: body.regNo,
         email: body.email,
         password: body.password,
         confirmPassword: body.confirmPassword,
@@ -74,6 +75,7 @@ router.post('/register', (req, res) => {
     req.checkBody('firstName', 'First Name is required').notEmpty();
     req.checkBody('lastName', 'Last Name is required').notEmpty();
     req.checkBody('email', 'Invalid Email Address').isEmail();
+    req.checkBody('regNo', 'Invalid Registration Number').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
     req.checkBody('confirmPassword', 'Passwords do not match!').equals(newStudent.password);
     req.checkBody('gender', 'Please Select your Gender').notEmpty();
@@ -84,33 +86,36 @@ router.post('/register', (req, res) => {
         res.render('studentSignup', {
             title: 'Student Signup',
             style: '/css/signup.css',
-            script: '/js/signup.js',
+            script: '/js/studentSignup.js',
             errors: errors,
             firstName: newStudent.firstName,
             lastName: newStudent.lastName,
             email: newStudent.email,
+            regNo: newStudent.regNo,
             password: newStudent.password,
             confirmPassword: newStudent.confirmPassword
         });
     } else {
         let student = new Student({
             name: `${newStudent.firstName} ${newStudent.lastName}`,
+            regNo: newStudent.regNo,
             email: newStudent.email,
             password: newStudent.password,
             gender: newStudent.gender
         });
 
-        Student.findOne({email: student.email}, (err, returnedStudent) => {
+        Student.findOne({regNo: student.regNo}, (err, returnedStudent) => {
             if (err) {
                 return console.log(err);
             } else if (returnedStudent) {
                 res.render('studentSignup', {
                     title: 'Student Signup',
                     style: '/css/signup.css',
-                    script: '/js/signup.js',
-                    error: 'Username already taken',
+                    script: '/js/studentSignup.js',
+                    error: 'Student already exists',
                     firstName: newStudent.firstName,
                     lastName: newStudent.lastName,
+                    regNo: newStudent.regNo,
                     email: newStudent.email,
                     password: newStudent.password,
                     confirmPassword: newStudent.confirmPassword,
@@ -147,7 +152,7 @@ router.post('/login', (req, res, next) => {
             return next(err);
         }
         if (!student) {
-            req.flash('failure', 'Incorrect Email or Password.');
+            req.flash('failure', 'Incorrect Registration Number or Password.');
             return res.redirect('/');
         }
 
