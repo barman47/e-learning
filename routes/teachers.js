@@ -13,7 +13,7 @@ const config = require('../config/database');
 let Teacher = require('../models/teacher');
 let Student = require('../models/student');
 let Question = require('../models/question');
-let File = require('../models/file');
+let Book = require('../models/book');
 
 const mongoURI = config.database;
 
@@ -34,22 +34,12 @@ conn.once('open', () => {
 });
 
 // Create Storage engine
-const storage = new GridFsStorage({
-    url: mongoURI,
-    file: (req, file) => {
-        return new Promise((resolve, reject) => {
-            crypto.randomBytes(16, (err, buf) => {
-                if (err) {
-                    return reject(err);
-                }
-                const filename = buf.toString('hex') + path.extname(file.originalname);
-                const fileInfo = {
-                    filename: filename,
-                    bucketName: 'books'
-                };
-                resolve(fileInfo);
-            });
-        });
+const storage = multer.diskStorage({
+    destination: (req, file, callback) => {
+        callback(null, './public/uploads');
+    },
+    filename: (req, file, callback) => {
+        callback(null, file.originalname);
     }
 });
 
@@ -196,12 +186,12 @@ router.get('/dashboard/:id', (req, res) => {
 
 router.get('/courses/:category', (req, res) => {
     console.log(req.params.category);
-    File.find({category: req.params.category}, (err, file) => {
+    Book.find({category: req.params.category}, (err, books) => {
         if (err) {
             return console.log(err);
         }
-        if (!file) {
-            return console.log('No file exists');
+        if (!book) {
+            return console.log('No books exist');
         } else {
             console.log(file._id);
             gfs.collection('books');
@@ -221,17 +211,26 @@ router.get('/courses/:category', (req, res) => {
 // @route POST /upload
 // @desc Uploads file to DB
 router.post('/upload/:id', upload.single('file'), (req, res) => {
+    // return console.log(req.file);
     const teacherId = req.params.id;
-    let fileId = req.file.id;
-    fileId = mongoose.Types.ObjectId(fileId);
+    let path = req.file.path;
+    let bookName = req.file.originalname;
+    let bookPath = {
+        path,
+        originalName: bookName
+    };
+    let bookId = req.file.id;
+    bookId = mongoose.Types.ObjectId(bookId);
     const category = req.body.subjectCategory;
 
-    let file = new File({
-        _id: fileId,
+    let book = new Book({
+        bookName,
+        path: bookPath.path,
+        originalName: bookPath.originalName,
         category
     });
 
-    file.save((err) => {
+    book.save((err) => {
         if (err) {
             return console.log(err);
         } else {
@@ -243,20 +242,18 @@ router.post('/upload/:id', upload.single('file'), (req, res) => {
 
 });
 
-// @route GET /books
-// @desc Display all books in JSON
 router.get('/books', (req, res) => {
-    gfs.collection('books');
-    gfs.files.find().toArray((err, books) => {
+    Book.find((err, books) => {
         if (!books || books.length === 0) {
-            return res.status(404).json({
-                err: 'No files exist'
-            });
+            return console.log('No books found'); 
+        } else if (err) {
+            return console.log(err);
         }
-        // return res.json(books);
+        console.log(books);
         res.render('books', {
             books
         });
+        
     });
 });
 

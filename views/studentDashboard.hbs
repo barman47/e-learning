@@ -52,54 +52,28 @@
 <div class="container">
     <h5 id="welcomeMessage">Welcome back {{name}}</h5>
     <h3 class="green-text text-darken-2 center">Study Materials</h3>
-    <ul id="computer-courses" class="scrollspy collection with-header">
-        <li class="collection-header  darken-4">Computer Studies</li>
-        <li class="collection-item"><a>Course 1</a></li>
-        <li class="collection-item"><a>Course 2</a></li>
-        <li class="collection-item"><a>Course 3</a></li>
-        <li class="collection-item"><a>Course 4</a></li>
-        <li class="collection-item"><a>Course 5</a></li>
-    </ul>
-    <ul id="commerce-courses" class="scrollspy collection with-header">
-        <li class="collection-header darken-4">Commerce</li>
-        <li class="collection-item"><a>Course 1</a></li>
-        <li class="collection-item"><a>Course 2</a></li>
-        <li class="collection-item"><a>Course 3</a></li>
-        <li class="collection-item"><a>Course 4</a></li>
-        <li class="collection-item"><a>Course 5</a></li>
-    </ul>
-    <ul id="biology-courses" class="scrollspy collection with-header">
-        <li class="collection-header darken-4">Biology</li>
-        <li class="collection-item"><a>Course 1</a></li>
-        <li class="collection-item"><a>Course 2</a></li>
-        <li class="collection-item"><a>Course 3</a></li>
-        <li class="collection-item"><a>Course 4</a></li>
-        <li class="collection-item"><a>Course 5</a></li>
-    </ul>
-    <ul id="chemistry-courses" class="scrollspy collection with-header">
-        <li class="collection-header darken-4">Chemistry</li>
-        <li class="collection-item"><a>Course 1</a></li>
-        <li class="collection-item"><a>Course 2</a></li>
-        <li class="collection-item"><a>Course 3</a></li>
-        <li class="collection-item"><a>Course 4</a></li>
-        <li class="collection-item"><a>Course 5</a></li>
-    </ul>
-    <ul id="physics-courses" class="scrollspy collection with-header">
-        <li class="collection-header darken-4">Physics</li>
-        <li class="collection-item"><a>Course 1</a></li>
-        <li class="collection-item"><a>Course 2</a></li>
-        <li class="collection-item"><a>Course 3</a></li>
-        <li class="collection-item"><a>Course 4</a></li>
-        <li class="collection-item"><a>Course 5</a></li>
-    </ul>
-    <ul id="crs-courses" class="scrollspy collection with-header">
-        <li class="collection-header darken-4">Christian Religious Studies</li>
-        <li class="collection-item"><a>Course 1</a></li>
-        <li class="collection-item"><a>Course 2</a></li>
-        <li class="collection-item"><a>Course 3</a></li>
-        <li class="collection-item"><a>Course 4</a></li>
-        <li class="collection-item"><a>Course 5</a></li>
-    </ul>
+    {{#if books}}
+        <div class="books">
+            <ul id="computer-courses" class="scrollspy collection with-header">
+                <li class="collection-header  darken-4">Computer Studies</li>
+            </ul>
+            <ul id="commerce-courses" class="scrollspy collection with-header">
+                <li class="collection-header darken-4">Commerce</li>
+            </ul>
+            <ul id="biology-courses" class="scrollspy collection with-header">
+                <li class="collection-header darken-4">Biology</li>
+            </ul>
+            <ul id="chemistry-courses" class="scrollspy collection with-header">
+                <li class="collection-header darken-4">Chemistry</li>
+            </ul>
+            <ul id="physics-courses" class="scrollspy collection with-header">
+                <li class="collection-header darken-4">Physics</li>
+            </ul>
+            <ul id="crs-courses" class="scrollspy collection with-header">
+                <li class="collection-header darken-4">Christian Religious Studies</li>
+            </ul>
+        </div>
+    {{/if}}
 </div> 
 
 <div class="fixed-action-btn">

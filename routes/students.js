@@ -13,6 +13,7 @@ const config = require('../config/database');
 
 let Student = require('../models/student');
 let Question = require('../models/question');
+let Book = require('../models/book');
 
 const mongoURI = config.database;
 
@@ -171,31 +172,22 @@ router.get('/dashboard/:id', (req, res) => {
             return console.log(err);
         } else {
             let studentData = student;
-            gfs.collection('books');
-            gfs.files.find().toArray((err, books) => {
+            Book.find((err, books) => {
                 if (!books || books.length === 0) {
-                    console.log('No files exist');
-                    res.render('studentDashboard', {
-                        title: 'Student Dashboard',
-                        style: '/css/studentDashboard.css',
-                        script: '/js/studentDashboard.js',
-                        student: studentData,
-                        name: studentData.name,
-                        books
-                    });
-                } else {
-                    res.render('studentDashboard', {
-                        title: 'Student Dashboard',
-                        style: '/css/studentDashboard.css',
-                        script: '/js/studentDashboard.js',
-                        student: studentData,
-                        name: studentData.name,
-                        books
-                    });
+                    return console.log('No books found'); 
+                } else if (err) {
+                    return console.log(err);
                 }
                 console.log(books);
+                res.render('studentDashboard', {
+                    title: 'Student Dashboard',
+                    style: '/css/studentDashboard.css',
+                    script: '/js/studentDashboard.js',
+                    student: studentData,
+                    name: studentData.name,
+                    books
+                }); 
             });
-            
         }
     });
 });
@@ -221,6 +213,21 @@ router.post('/askQuestion', (req, res) => {
         }
     });
     res.end();
+});
+
+router.get('/books', (req, res) => {
+    Book.find((err, books) => {
+        if (!books || books.length === 0) {
+            return console.log('No books found'); 
+        } else if (err) {
+            return console.log(err);
+        }
+        console.log(books);
+        res.render('books', {
+            books
+        });
+        
+    });
 });
 
 router.get('/logout', (req, res) => {
