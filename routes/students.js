@@ -13,6 +13,7 @@ const config = require('../config/database');
 
 let Student = require('../models/student');
 let Question = require('../models/question');
+let AnsweredQuestions = require('../models/answered-questions');
 let Book = require('../models/book');
 
 const mongoURI = config.database;
@@ -172,21 +173,40 @@ router.get('/dashboard/:id', (req, res) => {
             return console.log(err);
         } else {
             let studentData = student;
-            Book.find((err, books) => {
-                if (!books || books.length === 0) {
-                    return console.log('No books found'); 
-                } else if (err) {
-                    return console.log(err);
-                }
-                console.log(books);
-                res.render('studentDashboard', {
-                    title: 'Student Dashboard',
-                    style: '/css/studentDashboard.css',
-                    script: '/js/studentDashboard.js',
-                    student: studentData,
-                    name: studentData.name,
-                    books
-                }); 
+            Book.find({category: 'computer'}, (err, computerBooks) => {
+                if (err) return console.log(err);
+                Book.find({category: 'commerce'}, (err, commerceBooks) => {
+                    if (err) return console.log(err);
+                    Book.find({category: 'biology'}, (err, biologyBooks) => {
+                        if (err) return console.log(err);
+                        Book.find({category: 'chemistry'}, (err, chemistryBooks) => {
+                            if (err) return console.log(err);
+                            Book.find({category: 'physics'}, (err, physicsBooks) => {
+                                if (err) return console.log(err);
+                                Book.find({category: 'crs'}, (err, crsBooks) => {
+                                    if (err) return console.log(err);
+                                    AnsweredQuestions.find({}, (err, answeredQuestions) => {
+                                        if (err) return console.log(err);
+                                        res.render('studentDashboard', {
+                                            title: 'Student Dashboard',
+                                            style: '/css/studentDashboard.css',
+                                            script: '/js/studentDashboard.js',
+                                            student: studentData,
+                                            name: studentData.name,
+                                            computerBooks,
+                                            commerceBooks,
+                                            biologyBooks,
+                                            chemistryBooks,
+                                            physicsBooks,
+                                            crsBooks,
+                                            answeredQuestions
+                                        }); 
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
             });
         }
     });

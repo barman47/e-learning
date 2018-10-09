@@ -18,6 +18,10 @@ const BookSchema = mongoose.Schema({
     category: {
         type: String,
         required: true
+    },
+    bookTitle: {
+        type: String,
+        required: true
     }
 });
 

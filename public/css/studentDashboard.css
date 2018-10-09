@@ -78,3 +78,8 @@ header, main {
 .mdi-close:hover {
 	color: #328036;
 }
+.answered-questions {
+	border: 2px solid #f1f1f1;
+	padding-left: 20px;
+	margin-top: 10px;
+}

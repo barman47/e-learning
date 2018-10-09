@@ -94,22 +94,6 @@ $(document).ready(function () {
         }, false);
     }
 
-    // function handleButtonClick (button, inputsArr) {
-    //     button.addEventListener('click', function (event) {
-    //         if (isEmpty(inputsArr[0][0])) {
-    //             event.preventDefault();
-    //             inputsArr[0][0].classList.add('invalid');
-    //             inputsArr[0][0].focus();
-    //         } else if (isEmpty(inputsArr[1][0])) {
-    //             event.preventDefault();
-    //             inputsArr[1][0].classList.add('invalid');
-    //             inputsArr[1][0].focus();
-    //         } else {
-    //             ajaxLogin(form);
-    //         }
-    //     }, false);
-    // }
-
     function addKeyupEvent (regNo) {
         regNo.addEventListener('keyup', function (event) {
             if (regNoRegExp.test(regNo.value)) {
@@ -131,9 +115,6 @@ $(document).ready(function () {
                 event.target.classList.add('invalid');
                 event.target.classList.remove('valid');
                 regNo.focus();
-                // M.toast({
-                //     html: 'Please provide a valid email to continue.'
-                // });
             }
         }, false);
     }
@@ -141,12 +122,6 @@ $(document).ready(function () {
     addKeyupEvent(studentInputs[0][0]);
     addFocusoutEvent(studentInputs[0][0]);
     submitForm(forms.student, studentInputs);
-    //handleButtonClick(buttons.student, studentInputs);
-
-    // addKeyupEvent(teacherInputs[0][0]);
-    // addFocusoutEvent(teacherInputs[0][0]);
-    // submitForm(forms.teacher, teacherInputs);
-    // //handleButtonClick(buttons.teacher, teacherInputs);
 
     $('.pushpin').pushpin({
         top: $('.pushpin').offset().top,            

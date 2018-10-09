@@ -116,6 +116,5 @@ $(document).ready(function () {
         }, false);
     }
     form.addEventListener('submit', submitForm, false);
-    //submitButton.addEventListener('click', submitForm, false);
     checkInputs();
 });

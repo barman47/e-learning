@@ -10,11 +10,14 @@ const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const passport = require('passport');
 const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
+// const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
-const crypto = require('crypto');
+// const crypto = require('crypto');
 const path =  require('path');
+const fs = require('fs');
+
+const Book = require('./models/book');
 
 const config = require('./config/database');
 const students = require('./routes/students');
@@ -23,7 +26,7 @@ const teachers = require('./routes/teachers');
 const PORT = process.env.PORT || 3200;
 const publicPath = path.join(__dirname, 'public');
 
-const mongoURI = config.database;
+// const mongoURI = config.database;
 
 mongoose.connect(config.database, {
     useNewUrlParser: true
@@ -131,6 +134,23 @@ app.get('/', (req, res) => {
         script: 'js/home.js',
         script2: 'js/teacherLogin.js'
     });
+});
+
+app.delete('/deleteMaterial', (req, res) => {
+    let path  = req.body.path;
+    path = `${__dirname}/public${path}`;
+    Book.findOneAndRemove({_id: req.body.id}, (err) => {
+        if (err) {
+            return console.log(err);
+        }
+        fs.unlink(path, (err) => {
+            if (err) {
+                return console.log(err)
+            };
+            return console.log('File Deleted Successfully');
+        });
+    });
+    res.end();
 });
 
 app.get('*', function(req, res){

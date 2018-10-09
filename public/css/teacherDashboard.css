@@ -68,11 +68,20 @@ header, main {
 }
 
 .mdi-close:hover {
-	color: #328036;
+	color: #ef5350 !important;
 }
 
 .faqs {
 	border: 2px solid #f1f1f1;
 	padding-left: 10px;
 	padding-right: 10px;
+}
+
+.mdi-close:hover, {
+	color: #fff;
+}
+
+.delete-icons:hover {
+	color: #ef5350;
+	cursor: pointer;
 }

@@ -1,5 +1,30 @@
-{{#if books}}
-    {{#each books}}
-        <a href="/uploads/{{this.bookName}}" target="_blank">Books</a>
+{{#if computerBooks}}
+    {{#each computerBooks}}
+        <a href="/uploads/{{this.bookName}}" target="_blank">{{this.bookTitle}}</a>
+    {{/each}}
+{{/if}}
+{{#if commerceBooks}}
+    {{#each commerceBooks}}
+        <a href="/uploads/{{this.bookName}}" target="_blank">{{this.bookTitle}}</a>
+    {{/each}}
+{{/if}}
+{{#if biologyBooks}}
+    {{#each biologyBooks}}
+        <a href="/uploads/{{this.bookName}}" target="_blank">{{this.bookTitle}}</a>
+    {{/each}}
+{{/if}}
+{{#if chemistryBooks}}
+    {{#each chemistryBooks}}
+        <a href="/uploads/{{this.bookName}}" target="_blank">{{this.bookTitle}}</a>
+    {{/each}}
+{{/if}}
+{{#if physicsBooks}}
+    {{#each physicsBooks}}
+        <a href="/uploads/{{this.bookName}}" target="_blank">{{this.bookTitle}}</a>
+    {{/each}}
+{{/if}}
+{{#if crsBooks}}
+    {{#each crsBooks}}
+        <a href="/uploads/{{this.bookName}}" target="_blank">{{this.bookTitle}}</a>
     {{/each}}
 {{/if}}

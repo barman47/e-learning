@@ -4,18 +4,18 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
+// const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
-const crypto = require('crypto');
-const path = require('path');
+// const crypto = require('crypto');
 
 const config = require('../config/database');
 let Teacher = require('../models/teacher');
 let Student = require('../models/student');
 let Question = require('../models/question');
+let AnsweredQuestion = require('../models/answered-questions');
 let Book = require('../models/book');
 
-const mongoURI = config.database;
+// const mongoURI = config.database;
 
 mongoose.connect(config.database, {
     useNewUrlParser: true
@@ -168,15 +168,38 @@ router.get('/dashboard/:id', (req, res) => {
                     if (err) {
                         return console.log(err);
                     }
-                    let teacherName = teacher.name;
-                    res.render('teacherDashboard', {
-                        title: 'Teacher Dashboard',
-                        style: '/css/teacherDashboard.css',
-                        script: '/js/teacherDashboard.js',
-                        question,
-                        name: teacherName,
-                        id: teacher._id,
-                        student
+                    Book.find({category: 'computer'}, (err, computerBooks) => {
+                        if (err) return console.log(err);
+                        Book.find({category: 'commerce'}, (err, commerceBooks) => {
+                            if (err) return console.log(err);
+                            Book.find({category: 'biology'}, (err, biologyBooks) => {
+                                if (err) return console.log(err);
+                                Book.find({category: 'chemistry'}, (err, chemistryBooks) => {
+                                    if (err) return console.log(err);
+                                    Book.find({category: 'physics'}, (err, physicsBooks) => {
+                                        if (err) return console.log(err);
+                                        Book.find({category: 'crs'}, (err, crsBooks) => {
+                                            if (err) return console.log(err);
+                                            res.render('teacherDashboard', {
+                                                title: 'Teacher Dashboard',
+                                                style: '/css/teacherDashboard.css',
+                                                script: '/js/teacherDashboard.js',
+                                                question,
+                                                teacher,
+                                                teacherName: teacher.name,
+                                                student,
+                                                computerBooks,
+                                                commerceBooks,
+                                                biologyBooks,
+                                                chemistryBooks,
+                                                physicsBooks,
+                                                crsBooks                  
+                                            }); 
+                                        });
+                                    });
+                                });
+                            });
+                        });
                     });
                 });
             }
@@ -184,29 +207,29 @@ router.get('/dashboard/:id', (req, res) => {
     });
 });
 
-router.get('/courses/:category', (req, res) => {
-    console.log(req.params.category);
-    Book.find({category: req.params.category}, (err, books) => {
-        if (err) {
-            return console.log(err);
-        }
-        if (!book) {
-            return console.log('No books exist');
-        } else {
-            console.log(file._id);
-            gfs.collection('books');
-            gfs.files.find({_id: file._id}).toArray((err, books) => {
-                if (!books || books.length === 0) {
-                    return res.status(404).json({
-                        err: 'No files exist'
-                    });
-                }
-                return res.json(books);
-            });
-        }
-    });
+// router.get('/courses/:category', (req, res) => {
+//     console.log(req.params.category);
+//     Book.find({category: req.params.category}, (err, books) => {
+//         if (err) {
+//             return console.log(err);
+//         }
+//         if (!book) {
+//             return console.log('No books exist');
+//         } else {
+//             console.log(file._id);
+//             gfs.collection('books');
+//             gfs.files.find({_id: file._id}).toArray((err, books) => {
+//                 if (!books || books.length === 0) {
+//                     return res.status(404).json({
+//                         err: 'No files exist'
+//                     });
+//                 }
+//                 return res.json(books);
+//             });
+//         }
+//     });
 
-});
+// });
 
 // @route POST /upload
 // @desc Uploads file to DB
@@ -222,12 +245,14 @@ router.post('/upload/:id', upload.single('file'), (req, res) => {
     let bookId = req.file.id;
     bookId = mongoose.Types.ObjectId(bookId);
     const category = req.body.subjectCategory;
+    const bookTitle = req.body.bookTitle;
 
     let book = new Book({
         bookName,
         path: bookPath.path,
         originalName: bookPath.originalName,
-        category
+        category,
+        bookTitle
     });
 
     book.save((err) => {
@@ -243,17 +268,52 @@ router.post('/upload/:id', upload.single('file'), (req, res) => {
 });
 
 router.get('/books', (req, res) => {
-    Book.find((err, books) => {
-        if (!books || books.length === 0) {
-            return console.log('No books found'); 
-        } else if (err) {
+    Book.find({category: 'computer'}, (err, computerBooks) => {
+        if (err) return console.log(err);
+        Book.find({category: 'commerce'}, (err, commerceBooks) => {
+            if (err) return console.log(err);
+            Book.find({category: 'biology'}, (err, biologyBooks) => {
+                if (err) return console.log(err);
+                Book.find({category: 'chemistry'}, (err, chemistryBooks) => {
+                    if (err) return console.log(err);
+                    Book.find({category: 'physics'}, (err, physicsBooks) => {
+                        if (err) return console.log(err);
+                        Book.find({category: 'crs'}, (err, crsBooks) => {
+                            if (err) return console.log(err);
+                            res.render('books', {
+                                computerBooks,
+                                commerceBooks,
+                                biologyBooks,
+                                chemistryBooks,
+                                physicsBooks,
+                                crsBooks
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
+});
+router.post('/answeredQuestions', (req, res) => {
+    let answeredQuestion = new AnsweredQuestion({
+        _id: req.body.id,
+        question: req.body.question,
+        answer: req.body.answer,
+        askedBy: req.body.askedBy,
+        answeredBy: req.body.answeredBy
+    });
+    answeredQuestion.save((err) => {
+        if (err) {
             return console.log(err);
         }
-        console.log(books);
-        res.render('books', {
-            books
+        Question.findByIdAndRemove(answeredQuestion._id, (err) => {
+            if (err) {
+                return console.log(err);
+            }
+            console.log('Question Answered Successfully.');
+            res.end();
         });
-        
     });
 });
 

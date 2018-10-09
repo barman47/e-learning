@@ -1,4 +1,4 @@
-<div id="navigation" class="scrollspy">
+<div id="navigation" class="scrollspy" data-teacher="{{teacher.name}}">
     <nav class="pushpin green darken-2">
         <ul id="courses-dropdown" class="dropdown-content">
             <li><a class="dropdown-links" href="/teachers/courses/computer">Computer Studies</a></li>
@@ -20,7 +20,7 @@
                 <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="menu-icon mdi mdi-menu"></i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="/"><i class="nav-icons mdi mdi-home left"></i>Home</a></li>
-                    <li class="active"><a href=""><i class="nav-icons mdi mdi-home left"></i>My Dashboard</a></li>
+                    <li class="active"><a href="#"><i class="nav-icons mdi mdi-view-dashboard left"></i>My Dashboard</a></li>
                     <li><a class="dropdown-trigger" data-target="courses-dropdown"><i class="nav-icons mdi mdi-google-pages left"></i>Courses<i class="mdi mdi-menu-down right"></i></a></li>
                     <li><a href="/teachers/logout"><i class="nav-icons mdi mdi-logout left"></i>Logout</i></a></li>
                 </ul>
@@ -45,7 +45,7 @@
         <li><a href="#" class="dropdown-links"><i class="green-text text-darken-2 mdi mdi-home"></i>Home</a></li>
         <li><div class="divider"></div></li>
         <li><a class="dropdown-trigger" data-target="mobile-courses-dropdown"><i class="green-text text-darken-2 mdi mdi-google-pages"></i>Courses</a></li>
-        <li class="active"><a href="">My Dashboard<i class="green-text text-darken-2 mdi mdi-google-pages"></i></a></li>
+        <li class="active"><a href="#">My Dashboard<i class="green-text text-darken-2 mdi mdi-view-dashboard"></i></a></li>
         <li><a href="/teachers/logout"><i class="green-text text-darken-2 mdi mdi-logout"></i>Logout</a></li>
     </ul>
 </div>
@@ -79,9 +79,11 @@
     <ul>
         <li><a class="btn-floating purple lighten-2 tooltipped modal-trigger" data-target="upload-modal" data-tooltip="Upload Materials"><i class="mdi mdi-upload"></i></a></li>
         <li><a class="btn-floating blue lighten-2 tooltipped modal-trigger" data-target="questions-modal" data-tooltip="FAQs"><i class="mdi mdi-help"></i></a></li>
+        <li><a class="btn-floating red darken-4 tooltipped modal-trigger" data-target="deleteModal" id="delete" data-tooltip="Remove Material"><i class="mdi mdi-close"></i></a></li>
         <li><a class="btn-floating yellow darken-2 tooltipped" href="#navigation" id="top" data-tooltip="To page top"><i class="mdi mdi-chevron-up"></i></a></li>
     </ul>
 </div>
+
 <div id="questions-modal" class="modal">
     <div class="modal-content">
         <div class="row">
@@ -94,8 +96,9 @@
                             <p class="flow-text question" data-id="{{this.id}}">{{this.questionAsked}}</p>
                             <p>Asked By: <span class="green-text text-darken-2">{{this.askedBy}}</span></p>
                             <div class="input-field">
-                                <input type="text" class="answer" name="answer" placeholder="Answer This Question">
-                                <button class="answerBtn btn green darken-2" data-by="{{name}}">Answer Me</button>
+                                <input type="text" class="answer" placeholder="Answer This Question" class="validate">
+                                <span class="helper-text" data-error="Please provide answer."></span>
+                                <button class="answerBtn btn green darken-2">Answer Me</button>
                             </div>
                         </div>
                     {{/each}}
@@ -113,9 +116,9 @@
             <div class="col s12">
                 <i class="mdi mdi-close mdi-24px modal-close right"></i>
                 <h3 id="uploadHeader">Upload Study Material</h3>
-                <form name="uploadForm" action="/teachers/upload/{{id}}" method="POST" enctype="multipart/form-data">
+                <form name="uploadForm" action="/teachers/upload/{{teacher._id}}" method="POST" enctype="multipart/form-data">
                     <div class="file-field input-field">
-                        <div class="btn green darken-2"><span>File</span><input type="file" name="file"></div>
+                        <div class="btn green darken-2"><span>File</span><input type="file" accept=".pdf" name="file"></div>
                         <div class="file-path-wrapper">
                             <input class="file-path validate" type="text" name="fileField" placeholder="Provide a file for upload">
                         </div>
@@ -133,10 +136,71 @@
                         </select>
                     </div>
                     <div class="input-field">
+                        <input type="text" name="bookTitle" id="bookTitle" class="validate">
+                        <label for="bookTitle">Book Title</label>
+                        <span class="helper-text" data-error="Please provide book name"></span>
+                    </div>
+                    <div class="input-field">
                         <button type="submit" id="uploadButton" class="btn green darken-2"><i class="mdi mdi-upload"></i>Upload</button>
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <h4>Remove Outdated Study Materials</h4>
+        <div>
+            {{#if computerBooks}}
+                <ul id="computer-courses" class="scrollspy collection with-header">
+                    <li class="collection-header">Computer Studies</li>
+                    {{#each computerBooks}}
+                        <li class="collection-item"><a href="/uploads/{{this.bookName}}" target="_blank" data-id="{{this._id}}">{{this.bookTitle}}</a><i class="mdi mdi-close-circle-outline mdi-24px right delete-icons tooltipped" data-tooltip="Remove Material" data-identity="{{this._id}}"></i></li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+            {{#if commerceBooks}}
+                <ul id="computer-courses" class="scrollspy collection with-header">
+                    <li class="collection-header">Commerce</li>
+                    {{#each commerceBooks}}
+                        <li class="collection-item"><a href="/uploads/{{this.bookName}}" target="_blank" data-id="{{this._id}}">{{this.bookTitle}}</a><i class="mdi mdi-close-circle-outline mdi-24px right delete-icons tooltipped" data-tooltip="Remove Material" data-identity="{{this._id}}"></i></li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+            {{#if biologyBooks}}
+                <ul id="computer-courses" class="scrollspy collection with-header">
+                    <li class="collection-header">Biology</li>
+                    {{#each biologyBooks}}
+                        <li class="collection-item"><a href="/uploads/{{this.bookName}}" target="_blank" data-id="{{this._id}}">{{this.bookTitle}}</a><i class="mdi mdi-close-circle-outline mdi-24px right delete-icons tooltipped" data-tooltip="Remove Material" data-identity="{{this._id}}"></i></li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+            {{#if chemistryBooks}}
+                <ul id="computer-courses" class="scrollspy collection with-header">
+                    <li class="collection-header">Chemistry</li>
+                    {{#each chemistryBooks}}
+                        <li class="collection-item"><a href="/uploads/{{this.bookName}}" target="_blank" data-id="{{this._id}}">{{this.bookTitle}}</a><i class="mdi mdi-close-circle-outline mdi-24px right delete-icons tooltipped" data-tooltip="Remove Material" data-identity="{{this._id}}"></i><i>
+                    {{/each}}
+                </ul>
+            {{/if}}
+            {{#if physicsBooks}}
+                <ul id="computer-courses" class="scrollspy collection with-header">
+                    <li class="collection-header">Physics</li>
+                    {{#each physicsBooks}}
+                        <li class="collection-item"><a href="/uploads/{{this.bookName}}" target="_blank" data-id="{{this._id}}">{{this.bookTitle}}</a><i class="mdi mdi-close-circle-outline mdi-24px right delete-icons tooltipped" data-tooltip="Remove Material" data-identity="{{this._id}}"></i></li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+            {{#if crsBooks}}
+                <ul id="computer-courses" class="scrollspy collection with-header">
+                    <li class="collection-header">Christian Religious Studies</li>
+                    {{#each crsBooks}}
+                        <li class="collection-item"><a href="/uploads/{{this.bookName}}" target="_blank">{{this.bookTitle}}</a><i class="mdi mdi-close-circle-outline mdi-24px right delete-icons tooltipped" data-tooltip="Remove Material" data-identity="{{this._id}}"></i></li>
+                    {{/each}}
+                </ul>
+            {{/if}}
         </div>
     </div>
 </div>
