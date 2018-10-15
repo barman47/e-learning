@@ -22,6 +22,10 @@ const BookSchema = mongoose.Schema({
     bookTitle: {
         type: String,
         required: true
+    },
+    uploadedBy: {
+        type: String,
+        required: true
     }
 });
 

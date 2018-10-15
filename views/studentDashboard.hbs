@@ -1,6 +1,18 @@
 <div id="navigation" class="scrollspy">
     <nav class="pushpin green darken-2">
-        <ul id="courses-dropdown" class="dropdown-content">
+        {{#if course}}
+            <ul id="courses-dropdown" class="dropdown-content">
+                {{#each course}}
+                    {{#if courses}}
+                        {{#each courses}}
+                            <li><a class="dropdown-links">{{this}}</a></li>
+                            <li class="divider"></li>
+                        {{/each}}
+                    {{/if}}
+                {{/each}}
+            </ul>
+        {{/if}}
+        {{!-- <ul >
             <li><a class="dropdown-links" href="#computer-courses">Computer Studies</a></li>
             <li class="divider"></li>
             <li><a class="dropdown-links" href="#commerce-courses">Commerce</a></li>
@@ -12,7 +24,7 @@
             <li><a class="dropdown-links" href="#physics-courses">Physics</a></li>
             <li class="divider"></li>
             <li><a class="dropdown-links" href="#crs-courses">Christian Religious Studies</a></li>
-        </ul>
+        </ul> --}}
 
         <div class="nav-wrapper">
             <div class="container">
@@ -53,6 +65,14 @@
     <h5 id="welcomeMessage">Welcome back {{name}}</h5>
     <h3 class="green-text text-darken-2 center">Study Materials</h3>
     <div class="books">
+        {{!-- {{#if books}}
+            <ul id="computer-courses" class="scrollspy collection with-header">
+                {{#each books}}
+                    <li class="collection-header">{{this.category}}</li>
+                    <li class="collection-item"><a href="/uploads/{{this.bookName}}" target="_blank" data-id="{{this._id}}">{{this.bookTitle}}</a><i class="mdi mdi-close-circle-outline mdi-24px right delete-icons tooltipped" data-tooltip="Remove Material" data-identity="{{this._id}}"></i></li>                       
+                {{/each}}
+            </ul>    
+        {{/if}} --}}
         {{#if computerBooks}}
             <ul id="computer-courses" class="scrollspy collection with-header">
                 <li class="collection-header  darken-4">Computer Studies</li>

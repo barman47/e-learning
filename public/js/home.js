@@ -27,6 +27,7 @@ $(document).ready(function () {
 
     const studentUrl = '/students/login';
     const teacherUrl = '/teachers/login';
+    const adminUrl = '/admins/login';
     let studentData = {
         regNo: $('#regNo').val(),
         studentPassword: $('#studentPassword').val()
@@ -36,6 +37,11 @@ $(document).ready(function () {
         teacherID: $('#teacherID').val(),
         studentPassword: $('#teacherPassword').val()
     };
+
+    let adminData = {
+        adminUsername: $('#adminUsername').val(),
+        adminPassword: $('#adminPassword').val()
+    }
 
     function studentAjaxLogin (form) {
         $.ajax(studentUrl, {
@@ -53,6 +59,19 @@ $(document).ready(function () {
 
     function studentAjaxLogin (form) {
         $.ajax(teacherUrl, {
+            type: 'POST',
+            studentData,
+            succes: success(function () {
+                form.reset();
+            })
+        }).fail(function () {
+            M.toast({
+                html: 'Invalid ID or Password!'
+            });
+        });
+    }
+    function adminAjaxLogin (form) {
+        $.ajax(adminUrl, {
             type: 'POST',
             studentData,
             succes: success(function () {

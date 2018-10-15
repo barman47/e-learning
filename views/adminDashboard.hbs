@@ -1,0 +1,55 @@
+<header>
+    <div id="navigation">
+        <nav class="pushpin">
+            <div class="nav-wrapper">
+                <div class="container">
+                    <a href="#" class="brand-logo"><i id="logo" class="mdi mdi-school"></i>Edufy</a>
+                    <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="menu-icon mdi mdi-menu"></i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="/"><i class="nav-icons mdi mdi-home left"></i>Home</a></li>
+                        <li class="active"><a href="#"><i class="nav-icons mdi mdi-login left" data-target="admin-modal"></i>Admin Dashboard</a></li>
+                        <li><a href="/"><i class="nav-icons mdi mdi-logout left"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <ul id="mobile-menu" class="sidenav">
+            <li class="active"><a href="/"><i class="nav-icons mdi mdi-home left"></i>Home</a></li>
+            <li><a href="#"><i class="nav-icons mdi mdi-login left" data-target="admin-modal"></i>Admin Dashboard</a></li>
+            <li><a href="/"><i class="nav-icons mdi mdi-logout left"></i>Logout</i></a></li>
+        </ul>
+    </header>
+<main class="container">
+    <br>
+    <h3 class="center">Admin Dashboard</h3>
+    <br>
+    <div id="collapsibleDiv">
+        <ul class="collapsible">
+            <li class="active">
+                <div class="collapsible-header"><h5>Add Course</h5></div>
+                <div class="collapsible-body">
+                    <div>
+                        <form id="addCourseForm">
+                            <div class="row">
+                                <div class="col s12 input-field">
+                                    <input type="text" name="course" id="course" autofocus>
+                                    <label for="course">Course Title</label>
+                                    <span class="helper-text" data-error="Please provide a course" data-success="Okay"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 input-field">
+                                    <button id="buttonAddCourse" class="btn waves-effect waves-white">Add Course</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header"><h5>Users</h5></div>
+                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+        </ul>
+    </div>
+</main>

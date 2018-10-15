@@ -95,7 +95,19 @@
                     </div>
 
                     <div class="input-field">
-                        <select name="subjectCategory">
+                        {{#if course}}
+                            <select name="subjectCategory">
+                                <option disabled selected value="">Choose a Subject Category</option>
+                                {{#each course}}
+                                    {{#if courses}}
+                                        {{#each courses}}
+                                            <option value="{{this}}">{{this}}</option>
+                                        {{/each}}
+                                    {{/if}}
+                                {{/each}}
+                            </select>
+                        {{/if}}
+                        {{!-- <select name="subjectCategory">
                             <option disabled selected value="">Choose a Subject Category</option>
                             <option value="computer">Computer Studies</option>
                             <option value="commerce">Commerce</option>
@@ -103,7 +115,7 @@
                             <option value="chemistry">Chemistry</option>
                             <option value="physics">Physics</option>
                             <option value="crs">Christian Religious Studies</option>
-                        </select>
+                        </select> --}}
                     </div>
                     <div class="input-field">
                         <input type="text" name="bookTitle" id="bookTitle" class="validate">
@@ -123,6 +135,28 @@
     <div class="modal-content">
         <h4>Remove Outdated Study Materials</h4>
         <div>
+            {{!-- {{#if books}}
+                <ul id="computer-courses" class="scrollspy collection with-header">
+                {{#each books}}
+                    {{#ifCond "==" this.uploadedBy teacher.name}}
+                        <li class="collection-header">{{this.category}}</li>
+                        <li class="collection-item"><a href="/uploads/{{this.bookName}}" target="_blank" data-id="{{this._id}}">{{this.bookTitle}}</a><i class="mdi mdi-close-circle-outline mdi-24px right delete-icons tooltipped" data-tooltip="Remove Material" data-identity="{{this._id}}"></i></li>                       
+                    {{/ifCond}}
+                {{/each}}
+                    <li class="collection-header">{{this.category}}</li>
+                    <li class="collection-item"><a href="/uploads/{{this.bookName}}" target="_blank" data-id="{{this._id}}">{{this.bookTitle}}</a><i class="mdi mdi-close-circle-outline mdi-24px right delete-icons tooltipped" data-tooltip="Remove Material" data-identity="{{this._id}}"></i></li>
+                </ul> 
+            {{/if}} --}}
+            {{!-- {{#if books}}
+                <ul id="computer-courses" class="scrollspy collection with-header">
+                {{#each books}}
+                    {{#if this.uploadedBy == teacher._id}}
+                        <li class="collection-header">{{this.category}}</li>
+                        <li class="collection-item"><a href="/uploads/{{this.bookName}}" target="_blank" data-id="{{this._id}}">{{this.bookTitle}}</a><i class="mdi mdi-close-circle-outline mdi-24px right delete-icons tooltipped" data-tooltip="Remove Material" data-identity="{{this._id}}"></i></li>                       
+                    {{/if}}
+                {{/each}}
+                </ul>    
+            {{/if}} --}}
             {{#if computerBooks}}
                 <ul id="computer-courses" class="scrollspy collection with-header">
                     <li class="collection-header">Computer Studies</li>

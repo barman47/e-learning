@@ -94,14 +94,7 @@ form {
 	margin-right: auto !important;
 }
 
-#studentPreloader {
-	position: relative;
-	top: 40px;
-	z-index: 99;
-	display: none;
-}
-
-#teacherPreloader {
+#studentPreloader, #teacherPreloader, #adminPreloader {
 	position: relative;
 	top: 40px;
 	z-index: 99;
@@ -133,7 +126,11 @@ form {
 	padding-bottom: 50px !important; */
 }
 
-#studentLoginButton, #teacherLoginButton {
+#adminLogin {
+	padding-top: 20px;
+}
+
+#studentLoginButton, #teacherLoginButton, #adminLoginButton {
 	width: 95%;
 	margin: 0 auto;
 	padding: 10px 0;
@@ -143,7 +140,7 @@ form {
 	cursor: pointer;
 }
 
-#studentLoginButton:hover, #teacherLoginButton:hover {
+#studentLoginButton:hover, #teacherLoginButton:hover, #adminLoginButton {
     background-color: #388e3c !important;
     color: #f5f5f5 !important;
 }

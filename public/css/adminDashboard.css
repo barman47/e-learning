@@ -1,0 +1,15 @@
+nav {
+    background-color: #328036;
+}
+
+h3 {
+    color: rgba(0, 0, 0, .5);
+}
+
+#collapsibleDiv {
+    margin: 100px 0px !important;
+}
+
+#buttonAddCourse {
+    background-color: #328036;
+}

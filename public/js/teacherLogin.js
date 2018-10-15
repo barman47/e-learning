@@ -1,11 +1,16 @@
 $(document).ready(function () {
     var forms = {
-        student: document.forms.studentLoginForm,
-        teacher: document.forms.TeacherLoginForm
+        teacher: document.forms.TeacherLoginForm,
+        admin: document.forms.adminLogin
     };
     var teacherInputs = [
         [forms.teacher.teacherID, document.querySelector('#teacherIDErrorMessage')], 
         [forms.teacher.teacherPassword, document.querySelector('#teacherPasswordErrorMessage')]
+    ];
+
+    var adminInputs = [
+        [forms.admin.adminUsername, document.querySelector('#adminUsernameErrorMessage')], 
+        [forms.admin.adminPassword, document.querySelector('#adminPasswordErrorMessage')]
     ];
 
     var teacherIDRegExp = /^NASS\/TU\/[0-9]{1,5}$/i;
@@ -15,11 +20,29 @@ $(document).ready(function () {
         teacherID: $('#teacherID').val(),
         teacherPassword: $('#teacherPassword').val()
     };
+    let adminData = {
+        adminUsername: $('#adminUsername').val(),
+        adminPassword: $('#adminPassword').val()
+    };
 
     function ajaxLogin (form) {
         $.ajax(url, {
             type: 'POST',
             data,
+            succes: success(function () {
+                form.reset();
+            })
+        }).fail(function () {
+            M.toast({
+                html: 'Invalid ID or Password!'
+            });
+            // document.querySelector('#incorrectStudentData').style.display = 'block';
+        });
+    }
+    function adminAjaxLogin (form) {
+        $.ajax('/admins/login', {
+            type: 'POST',
+            adminData,
             succes: success(function () {
                 form.reset();
             })
@@ -80,9 +103,6 @@ $(document).ready(function () {
                 event.target.classList.add('invalid');
                 event.target.classList.remove('valid');
                 teacherID.focus();
-                // M.toast({
-                //     html: 'Please provide a valid email to continue.'
-                // });
             }
         }, false);
     }
@@ -90,4 +110,6 @@ $(document).ready(function () {
     addKeyupEvent(teacherInputs[0][0]);
     addFocusoutEvent(teacherInputs[0][0]);
     submitForm(forms.teacher, teacherInputs);
+
+    submitForm(forms.admin, adminInputs);
 });

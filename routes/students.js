@@ -15,6 +15,7 @@ let Student = require('../models/student');
 let Question = require('../models/question');
 let AnsweredQuestions = require('../models/answered-questions');
 let Book = require('../models/book');
+let Course = require('../models/course');
 
 const mongoURI = config.database;
 
@@ -187,20 +188,24 @@ router.get('/dashboard/:id', (req, res) => {
                                     if (err) return console.log(err);
                                     AnsweredQuestions.find({}, (err, answeredQuestions) => {
                                         if (err) return console.log(err);
-                                        res.render('studentDashboard', {
-                                            title: 'Student Dashboard',
-                                            style: '/css/studentDashboard.css',
-                                            script: '/js/studentDashboard.js',
-                                            student: studentData,
-                                            name: studentData.name,
-                                            computerBooks,
-                                            commerceBooks,
-                                            biologyBooks,
-                                            chemistryBooks,
-                                            physicsBooks,
-                                            crsBooks,
-                                            answeredQuestions
-                                        }); 
+                                        Course.find({name: 'course'}, (err, course) => {
+                                            if (err) return console.log(err);
+                                            res.render('studentDashboard', {
+                                                title: 'Student Dashboard',
+                                                style: '/css/studentDashboard.css',
+                                                script: '/js/studentDashboard.js',
+                                                student: studentData,
+                                                name: studentData.name,
+                                                computerBooks,
+                                                commerceBooks,
+                                                biologyBooks,
+                                                chemistryBooks,
+                                                physicsBooks,
+                                                crsBooks,
+                                                answeredQuestions,
+                                                course
+                                            }); 
+                                        });
                                     });
                                 });
                             });

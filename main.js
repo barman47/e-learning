@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
+const Handlebars = require('handlebars');
+const HandlebarsIntl = require('handlebars-intl');
 const favicon = require('express-favicon');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -22,6 +24,7 @@ const Book = require('./models/book');
 const config = require('./config/database');
 const students = require('./routes/students');
 const teachers = require('./routes/teachers');
+const admins = require('./routes/admins');
 
 const PORT = process.env.PORT || 3200;
 const publicPath = path.join(__dirname, 'public');
@@ -78,11 +81,64 @@ app.use((req, res, next) => {
 
 app.use(favicon(publicPath + '/img/favicon.png'));
 app.use(express.static(publicPath));
-app.engine('.hbs', exphbs({
+
+// app.engine('.hbs', exphbs({
+//     extname: '.hbs',
+//     defaultLayout: 'main'
+// }));
+// exphbs.registerHelper("equal", require("handlebars-helper-equal"));
+// app.set('view engine', '.hbs');
+var hbs = exphbs.create({
     extname: '.hbs',
     defaultLayout: 'main'
-}));
-app.set('view engine', '.hbs');
+});
+app.engine(hbs.extname, hbs.engine);
+app.set('view engine', hbs.extname);
+Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+    switch (operator) {
+        case '==':
+            return (v1 == v2) ? options.fn(this) : options.inverse(this);
+        case '===':
+            return (v1 === v2) ? options.fn(this) : options.inverse(this);
+        case '!==':
+            return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+        case '<':
+            return (v1 < v2) ? options.fn(this) : options.inverse(this);
+        case '<=':
+            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+        case '>':
+            return (v1 > v2) ? options.fn(this) : options.inverse(this);
+        case '>=':
+            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+        case '&&':
+            return (v1 && v2) ? options.fn(this) : options.inverse(this);
+        case '||':
+            return (v1 || v2) ? options.fn(this) : options.inverse(this);
+        default:
+            return options.inverse(this);
+    }
+});
+// Handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
+//     if (arguments.length < 3)
+//         throw new Error("Handlebars Helper equal needs 2 parameters");
+//     if( lvalue != rvalue) {
+//         return options.inverse(this);
+//     } else {
+//         return options.fn(this);
+//     }
+// });
+// Handlebars.registerHelper('ifeq', (a, b, options) => {
+//     if (a === b) {
+//         return options.fn(this)
+//     }
+//     return options.inverse(this)
+// });
+// Handlebars.registerHelper('compareId', function(uploadedBy, teacherId){
+//     uploadedBy = uploadedBy.toString();
+//     teacherId = teacherId.toString();
+//     return uploadedBy === teacherId;
+// });
+// Handlebars.registerHelper("equal", require("handlebars-helper-equal"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
@@ -126,6 +182,7 @@ app.use((req, res, next) => {
 
 app.use('/students', students);
 app.use('/teachers', teachers);
+app.use('/admins', admins);
 
 app.get('/', (req, res) => {
     res.render('home', {

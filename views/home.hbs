@@ -23,10 +23,11 @@
             <div class="container">
                 <a href="#" class="brand-logo"><i id="logo" class="mdi mdi-school"></i>Edufy</a>
                 <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="menu-icon mdi mdi-menu"></i></a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <ul class="right hide-on-med-and-down">
                     <li class="active"><a href=""><i class="nav-icons mdi mdi-home left"></i>Home</a></li>
                     <li><a href="#!" class="dropdown-trigger" data-target="signup-dropdown"><i class="nav-icons mdi mdi-account-plus left"></i>Register<i class="mdi mdi-menu-down right"></i></a></li>
                     <li><a href="#!" class="dropdown-trigger" data-target="login-dropdown"><i class="nav-icons mdi mdi-login left"></i>Login<i class="mdi mdi-menu-down right"></i></a></li>
+                    <li><a href="#!" class=" modal-trigger" data-target="admin-modal"><i class="nav-icons mdi mdi-login left" data-target="admin-modal"></i>Admin</a></li>
                 </ul>
             </div>
         </div>
@@ -46,6 +47,7 @@
         <li><div class="divider"></div></li>
         <li><a href="#" class="dropdown-trigger" data-target="mobile-signup-dropdown"><i class="green-text text-darken-2 mdi mdi-account-plus"></i>Register</a></li>
         <li><a href="#" class="dropdown-trigger" data-target="mobile-login-dropdown"><i class="green-text text-darken-2 mdi mdi-login"></i>Login</a></li>
+        <li><a href="#!" class=" modal-trigger" data-target="admin-modal"><i class="nav-icons mdi mdi-login left" data-target="admin-modal"></i>Admin</a></li>
     </ul>
 </div>
 
@@ -134,6 +136,53 @@
             <div class="input-field center-align">
                 <p>Not Registered? <a class="form-links" href="/teachers/register">Sign up!</a></p>
             </div>
+        </form>
+    </div>
+</div>
+<div id="admin-modal" class="modal">
+    <div class="modal-content">
+        <div class="row container" id="adminPreloader">
+            <div class="col s12">
+                <div class="progress">
+                    <div class="indeterminate"></div>
+                </div>
+            </div>
+        </div>
+        <form id="adminLogin" name="adminLogin" method="POST" action="/admins/login">
+            {{#if adminErrors}}
+                {{#each adminErrors}}
+                    <div>
+                        <p class="red-text text-darken-2 error-messages center">{{this.msg}}</p>
+                    </div>
+                {{/each}}
+            {{/if}}
+            {{#if adminLoginError}}
+                <p class="red-text text-darken-2 error-messages center">{{adminLoginError}}</p>
+            {{/if}}
+            <div class="row">
+                <h4 class="center">Admin Login</h4>
+                <div class="col s12">
+                    <div class="input-field">
+                        <i class="mdi mdi-account-outline prefix form-icons"></i>
+                        <input type="text" id="adminUsername" name="adminUsername" class="validate">
+                        <label for="adminUsername">Username</label>
+                        <span id="adminUsernameErrorMessage" class="helper-text red-text text-darken-2" data-error="Invalid ID username!">{{adminUsernameError}}</span>
+                    </div>
+                </div>
+            
+                <div class="col s12">
+                    <div class="input-field">
+                        <i class="mdi mdi-lock-outline prefix form-icons"></i>
+                        <input type="password" id="adminPassword" name="adminPassword" class="validate">
+                        <label for="adminPassword">Password</label>
+                        <span  id="adminPasswordErrorMessage" class="helper-text red-text text-darken-2" data-error="Please provide your password!">{{adminPasswordError}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="center-align input-field">
+                <button id="adminLoginButton" type="submit">Log in</button>
+            </div>
+            <br>
         </form>
     </div>
 </div>

@@ -14,6 +14,7 @@ let Student = require('../models/student');
 let Question = require('../models/question');
 let AnsweredQuestion = require('../models/answered-questions');
 let Book = require('../models/book');
+let Course = require('../models/course');
 
 // const mongoURI = config.database;
 
@@ -155,6 +156,42 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
+// router.get('/dashboard/:id', (req, res) => {
+//     Question.find({}, (err, question) => {
+//         if (err) return console.log(err);
+//         Teacher.findOne({_id: req.params.id}, (err, teacher) => {
+//             if (err) return console.log(err);
+//             Student.find({}, (err, student) => {
+//                 if (err) return console.log(err);
+//                 let id = teacher._id.toString();
+//                 Course.findOne({name: 'course'}, (err, course) => {
+//                     if (err) return console.log(err);
+//                     Book.find({}, (err, books) => {
+//                         if (err) return console.log(books);
+//                         // course.courses.forEach((course) => {
+//                         //     console.log(course);
+//                         // });
+//                         let courses = course.courses;
+//                         res.render('teacherDashboard', {
+//                             title: 'Teacher Dashboard',
+//                             style: '/css/teacherDashboard.css',
+//                             script: '/js/teacherDashboard.js',
+//                             question,
+//                             teacher,
+//                             id: teacher._id,
+//                             teacherName: teacher.name,
+//                             student,
+//                             books,
+//                             course,
+//                             courses  
+//                         });
+//                     });
+//                 });
+//             });
+//         });
+//     });
+// });
+
 router.get('/dashboard/:id', (req, res) => {
     Question.find({}, (err, question) => {
         if (err) {
@@ -168,33 +205,38 @@ router.get('/dashboard/:id', (req, res) => {
                     if (err) {
                         return console.log(err);
                     }
-                    Book.find({category: 'computer'}, (err, computerBooks) => {
+                    let id = teacher._id.toString();
+                    Book.find({category: 'Computer Science', uploadedBy: teacher.name}, (err, computerBooks) => {
                         if (err) return console.log(err);
-                        Book.find({category: 'commerce'}, (err, commerceBooks) => {
+                        Book.find({category: 'Commerce', uploadedBy: teacher.name}, (err, commerceBooks) => {
                             if (err) return console.log(err);
-                            Book.find({category: 'biology'}, (err, biologyBooks) => {
+                            Book.find({category: 'Biology', uploadedBy: teacher.name}, (err, biologyBooks) => {
                                 if (err) return console.log(err);
-                                Book.find({category: 'chemistry'}, (err, chemistryBooks) => {
+                                Book.find({category: 'Chemistry', uploadedBy: teacher.name}, (err, chemistryBooks) => {
                                     if (err) return console.log(err);
-                                    Book.find({category: 'physics'}, (err, physicsBooks) => {
+                                    Book.find({category: 'Physics', uploadedBy: teacher.name}, (err, physicsBooks) => {
                                         if (err) return console.log(err);
-                                        Book.find({category: 'crs'}, (err, crsBooks) => {
+                                        Book.find({category: 'Christian Religious Studies', uploadedBy: teacher.name}, (err, crsBooks) => {
                                             if (err) return console.log(err);
-                                            res.render('teacherDashboard', {
-                                                title: 'Teacher Dashboard',
-                                                style: '/css/teacherDashboard.css',
-                                                script: '/js/teacherDashboard.js',
-                                                question,
-                                                teacher,
-                                                teacherName: teacher.name,
-                                                student,
-                                                computerBooks,
-                                                commerceBooks,
-                                                biologyBooks,
-                                                chemistryBooks,
-                                                physicsBooks,
-                                                crsBooks                  
-                                            }); 
+                                            Course.find({name: 'course'}, (err, course) => {
+                                                if (err) return console.log(err);
+                                                res.render('teacherDashboard', {
+                                                    title: 'Teacher Dashboard',
+                                                    style: '/css/teacherDashboard.css',
+                                                    script: '/js/teacherDashboard.js',
+                                                    question,
+                                                    teacher,
+                                                    teacherName: teacher.name,
+                                                    student,
+                                                    course,
+                                                    computerBooks,
+                                                    commerceBooks,
+                                                    biologyBooks,
+                                                    chemistryBooks,
+                                                    physicsBooks,
+                                                    crsBooks                  
+                                                }); 
+                                            });
                                         });
                                     });
                                 });
@@ -246,25 +288,27 @@ router.post('/upload/:id', upload.single('file'), (req, res) => {
     bookId = mongoose.Types.ObjectId(bookId);
     const category = req.body.subjectCategory;
     const bookTitle = req.body.bookTitle;
-
-    let book = new Book({
-        bookName,
-        path: bookPath.path,
-        originalName: bookPath.originalName,
-        category,
-        bookTitle
+    Teacher.findById(teacherId, (err, teacher) => {
+        if (err) return console.log(err);
+        let book = new Book({
+            bookName,
+            path: bookPath.path,
+            originalName: bookPath.originalName,
+            category,
+            bookTitle,
+            uploadedBy: teacher.name
+        });
+    
+        book.save((err) => {
+            if (err) {
+                return console.log(err);
+            } else {
+                console.log('File uploaded');
+                req.flash('success', 'File uploaded Sucessfully');
+                res.redirect(`/teachers/dashboard/${teacherId}`);
+            }
+        });
     });
-
-    book.save((err) => {
-        if (err) {
-            return console.log(err);
-        } else {
-            console.log('File uploaded');
-            req.flash('success', 'File uploaded Sucessfully');
-            res.redirect(`/teachers/dashboard/${teacherId}`);
-        }
-    });
-
 });
 
 router.get('/books', (req, res) => {
