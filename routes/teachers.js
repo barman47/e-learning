@@ -141,6 +141,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res, next) => {
     passport.authenticate('teacher', (err, teacher, info) => {
         if (err) {
+            console.log('=========ERROR=================');
             return next(err);
         }
         if (!teacher) {

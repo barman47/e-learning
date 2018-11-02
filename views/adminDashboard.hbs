@@ -7,7 +7,7 @@
                     <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="menu-icon mdi mdi-menu"></i></a>
                     <ul class="right hide-on-med-and-down">
                         <li><a href="/"><i class="nav-icons mdi mdi-home left"></i>Home</a></li>
-                        <li class="active"><a href="#"><i class="nav-icons mdi mdi-login left" data-target="admin-modal"></i>Admin Dashboard</a></li>
+                        <li class="active"><a href="#"><i class="nav-icons mdi mdi-view-dashboard left"></i>Admin Dashboard</a></li>
                         <li><a href="/"><i class="nav-icons mdi mdi-logout left"></i>Logout</a></li>
                     </ul>
                 </div>
@@ -15,7 +15,7 @@
         </nav>
         <ul id="mobile-menu" class="sidenav">
             <li class="active"><a href="/"><i class="nav-icons mdi mdi-home left"></i>Home</a></li>
-            <li><a href="#"><i class="nav-icons mdi mdi-login left" data-target="admin-modal"></i>Admin Dashboard</a></li>
+            <li><a href="#"><i class="nav-icons mdi mdi-view-dashboard left" data-target="admin-dashboardmodal"></i>Admin Dashboard</a></li>
             <li><a href="/"><i class="nav-icons mdi mdi-logout left"></i>Logout</i></a></li>
         </ul>
     </header>
@@ -25,8 +25,8 @@
     <br>
     <div id="collapsibleDiv">
         <ul class="collapsible">
-            <li class="active">
-                <div class="collapsible-header"><h5>Add Course</h5></div>
+            <li>
+                <div class="collapsible-header"><h5 class="green-text text-darken-2">Add Course</h5></div>
                 <div class="collapsible-body">
                     <div>
                         <form id="addCourseForm">
@@ -47,8 +47,51 @@
                 </div>
             </li>
             <li>
-                <div class="collapsible-header"><h5>Users</h5></div>
-                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                <div class="collapsible-header"><h5 class="green-text text-darken-2">Remove Course</h5></div>
+                <div class="collapsible-body">
+                    <form id="removeCourseForm">
+                        {{#if course}}
+                            <select id="removeCourse">
+                            <option disabled selected value="">Select a Course to Remove</option>
+                            {{#each course}}
+                                {{#if courses}}
+                                    {{#each courses}}
+                                        <option value="{{this}}">{{this}}</option>
+                                    {{/each}}
+                                {{/if}}
+                            {{/each}}
+                        </select>
+                    {{else}}
+                        <p>There are no Courses at this time</p>
+                    {{/if}}
+                        <button class="btn waves-effect waves-white" id="removeCourseButton">Remove</button>
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header"><h5 class="green-text text-darken-2">Users</h5></div>
+                <div class="collapsible-body">
+                    {{#if teachers}}
+                        <div>
+                            <ul class="collection with-header">
+                              <li class="collection-header green darken-2 white-text center"><h5>Teachers</h5></li>
+                                {{#each teachers}}
+                                    <li class="collection-item">{{this.name}}</li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    {{/if}}
+                    {{#if students}}
+                        <div>
+                            <ul class="collection with-header">
+                              <li class="collection-header green darken-2 white-text center"><h5>Student</h5></li>
+                                {{#each students}}
+                                    <li class="collection-item">{{this.name}}</li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    {{/if}}
+                </div>
             </li>
         </ul>
     </div>

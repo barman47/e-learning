@@ -174,17 +174,17 @@ router.get('/dashboard/:id', (req, res) => {
             return console.log(err);
         } else {
             let studentData = student;
-            Book.find({category: 'computer'}, (err, computerBooks) => {
+            Book.find({category: 'Computer Studies'}, (err, computerBooks) => {
                 if (err) return console.log(err);
-                Book.find({category: 'commerce'}, (err, commerceBooks) => {
+                Book.find({category: 'Commerce'}, (err, commerceBooks) => {
                     if (err) return console.log(err);
-                    Book.find({category: 'biology'}, (err, biologyBooks) => {
+                    Book.find({category: 'Biology'}, (err, biologyBooks) => {
                         if (err) return console.log(err);
-                        Book.find({category: 'chemistry'}, (err, chemistryBooks) => {
+                        Book.find({category: 'Chemistry'}, (err, chemistryBooks) => {
                             if (err) return console.log(err);
-                            Book.find({category: 'physics'}, (err, physicsBooks) => {
+                            Book.find({category: 'Physics'}, (err, physicsBooks) => {
                                 if (err) return console.log(err);
-                                Book.find({category: 'crs'}, (err, crsBooks) => {
+                                Book.find({category: 'Christian Religious Studies'}, (err, crsBooks) => {
                                     if (err) return console.log(err);
                                     AnsweredQuestions.find({}, (err, answeredQuestions) => {
                                         if (err) return console.log(err);

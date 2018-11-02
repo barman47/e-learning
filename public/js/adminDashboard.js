@@ -1,11 +1,22 @@
 $(document).ready(function () {
     $('.sidenav').sidenav();
     $('.collapsible').collapsible();
+    $('select').formSelect();
+    
+    var courseForm =  $('#addCourseForm');
+    var removeCourseForm = $('#removeCourseForm');
+    var course = $('#course');
+    var url = '/admins/addCourse';
+    
+    $('#removeCourseButton').addClass('disabled');
 
-    const courseForm =  $('#addCourseForm');
-    const course = $('#course');
-    const courseButton = $('#buttonAddCourse');
-    const url = '/admins/addCourse';
+    $('#removeCourse').on('change', function (event) {
+        if (event.target.value === '') {
+            $('#removeCourseButton').addClass('disabled');
+        } else {
+            $('#removeCourseButton').removeClass('disabled');
+        }
+    });
 
     courseForm.on('submit', function (event) {
         const data = {
@@ -28,6 +39,29 @@ $(document).ready(function () {
             }).fail(function () {
                 M.toast({
                     html: 'Error! Course not uploaded. Try again.'
+                });
+            });
+        }
+    });
+
+    removeCourseForm.on('submit', function (event) {
+        if ($('#removeCourse').val() === '' || $('#removeCourse').val().trim() === '') {
+            M.toast({ html: 'Please select a Course to remove' });
+        } else {
+            $.ajax('/admins/removeCourse', {
+                type: 'POST',
+                data: {
+                    courseToRemove: $('#removeCourse').val()
+                },
+                success: (function () {
+                    M.toast({html: 'Course Removed Successfully'});
+                    setTimeout(function () {
+                        location.reload();
+                    }, 4000);
+                })
+            }).fail(function () {
+                M.toast({
+                    html: 'Error! Could not remove Course. Try again.'
                 });
             });
         }

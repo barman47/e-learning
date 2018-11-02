@@ -39,7 +39,19 @@
             </div>
         </div>
     </nav>
-    <ul id="mobile-courses-dropdown" class="dropdown-content">
+    {{#if course}}
+        <ul id="courses-dropdown" class="dropdown-content">
+            {{#each course}}
+                {{#if courses}}
+                    {{#each courses}}
+                        <li><a class="dropdown-links">{{this}}</a></li>
+                        <li class="divider"></li>
+                    {{/each}}
+                {{/if}}
+            {{/each}}
+        </ul>
+        {{/if}}
+    {{!-- <ul id="mobile-courses-dropdown" class="dropdown-content">
         <li><a class="dropdown-links" href="#computer-courses">Computer Studies</a></li>
         <li class="divider"></li>
         <li><a class="dropdown-links" href="#commerce-courses">Commerce</a></li>
@@ -50,9 +62,9 @@
         <li class="divider"></li>
         <li><a class="dropdown-links" href="#physics-courses">Physics</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-links" href="#crs-courses">Christian Religious Studies</a></li>
+        <li><a class="dropdown-links" href="#crs-courses">Christian Religious Studies</a></li> --}}
     </ul>
-
+    
     <ul id="mobile-menu" class="sidenav">
         <li><a href="/" class="dropdown-links"><i class="green-text text-darken-2 mdi mdi-home"></i>Home</a></li>
         <li><div class="divider"></div></li>

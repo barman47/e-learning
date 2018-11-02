@@ -30,12 +30,12 @@ module.exports = (passport) => {
         passwordField: 'teacherPassword',
         passReqToCallback: true
     }, function verifyCallback (req, teacherID, teacherPassword, done) {
-        Teacher.findOne({teacherID: teacherID}, (err, teacher) => {
+        Teacher.findOne({teacherID}, function (err, teacher) {
             if (err) {
                 return done (err);
             }
 
-            if (!Teacher) {
+            if (!teacher) {
                 return done(null, false, {msg: 'No Teacher found'});
             }
             bcrypt.compare(teacherPassword, teacher.password, (err, isMatch) => {
@@ -81,7 +81,7 @@ module.exports = (passport) => {
         } else if (sessionConstructor.userGroup === Teacher) {
             Teacher.findOne({
                 _id: sessionConstructor.userId
-            }, '-localStrategy.password', (err, Teacher) => {
+            }, '-localStrategy.password', (err, teacher) => {
                 done (err, teacher);
             });
         }

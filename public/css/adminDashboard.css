@@ -10,6 +10,6 @@ h3 {
     margin: 100px 0px !important;
 }
 
-#buttonAddCourse {
+#buttonAddCourse, #removeCourseButton {
     background-color: #328036;
 }
