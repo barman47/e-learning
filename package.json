@@ -31,7 +31,7 @@
 				"express-session": "^1.15.6",
 				"express-validator": "^5.3.0",
 				"gridfs-stream": "^1.1.1",
-				"handlebars": "^4.4.2",
+				"handlebars": "^4.7.7",
 				"handlebars-helper-equal": "^1.0.0",
 				"handlebars-intl": "^1.1.2",
 				"method-override": "^3.0.0",
